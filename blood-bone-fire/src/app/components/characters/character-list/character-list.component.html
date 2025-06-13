@@ -1,0 +1,12 @@
+<div class="character-list">
+  <h2>Character List</h2>
+  <ul>
+    <li *ngFor="let c of characters" (click)="selectCharacter(c.id)">
+      {{ c.name }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="selectedCharacter">
+  <app-character-card [character]="selectedCharacter"></app-character-card>
+</div>

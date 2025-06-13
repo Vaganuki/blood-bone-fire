@@ -1,0 +1,17 @@
+<div class="character-card">
+  <h2>{{ character.name }}</h2>
+  <h3>Stats</h3>
+  <ul>
+    <li>HP: {{ character.stats.hp }}</li>
+    <li>MP: {{ character.stats.mp }}</li>
+    <li>Strength: {{ character.stats.strength }}</li>
+    <li>Dexterity: {{ character.stats.dexterity }}</li>
+    <li>Intelligence: {{ character.stats.intelligence }}</li>
+  </ul>
+
+  <h3>Skills</h3>
+  <ul>
+    <li *ngFor="let skill of character.skills">{{ skill }}</li>
+  </ul>
+
+</div>

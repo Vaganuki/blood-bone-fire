@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "name": "Dev 1",
+  "stats": {
+    "hp": 120,
+    "mp": 50,
+    "strength": 15,
+    "dexterity": 12,
+    "intelligence": 14
+  },
+  "skills": ["dev attack 1","dev attack 2","dev attack 3"]
+}
