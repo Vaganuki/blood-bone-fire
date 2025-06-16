@@ -1,0 +1,24 @@
+<div class="devCont">
+  <div class="car">
+    <div class="devCar">
+      <div class="devSquare red" #player>1</div>
+      <div class="devHp">HP:{{ character1?.stats?.hp }}</div>
+    </div>
+    <div class="devCar">
+      <div class="devSquare blue" #player>2</div>
+      <div class="devHp">HP:{{ character2?.stats?.hp }}</div>
+    </div>
+  </div>
+  <div class="atak">
+
+    <button (click)="attack()">UP B</button>
+    <ul>
+      <li *ngFor="let skill of displayedSkills">
+        <button (click)="attack()">
+          {{ skill }}
+        </button>
+
+      </li>
+    </ul>
+  </div>
+</div>

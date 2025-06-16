@@ -3,10 +3,11 @@ import {CharactersService} from '../../../services/characters.service';
 import {Character} from '../../../models/characters.model';
 import {CommonModule} from '@angular/common';
 import {CharacterCardComponent} from '../character-card/character-card.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-character-list',
-  imports: [CommonModule, CharacterCardComponent],
+  imports: [CommonModule, CharacterCardComponent, RouterLink],
   templateUrl: './character-list.component.html',
   styleUrl: './character-list.component.scss'
 })

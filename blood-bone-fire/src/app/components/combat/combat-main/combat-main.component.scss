@@ -1,0 +1,36 @@
+.devSquare{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  font-size: 3rem;
+  font-family: "Arial Black";
+}
+.red{
+  background-color: lightcoral;
+}
+.blue{
+  background-color: lightblue;
+}
+.activePlayer{
+  box-shadow: 0.2rem 0 2.5rem aqua;
+}
+.devCont{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.devCar{
+  width: fit-content;
+}
+.devHp{
+  color:green;
+}
+.car{
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+}

@@ -8,5 +8,16 @@
     "dexterity": 12,
     "intelligence": 14
   },
-  "skills": ["dev attack 1","dev attack 2","dev attack 3"]
+  "skills": [
+    "attack 1",
+    "attack 2",
+    "attack 3",
+    "attack 4",
+    "attack 5",
+    "attack 6",
+    "attack 7",
+    "attack 8",
+    "attack 9",
+    "attack 10"
+  ]
 }
