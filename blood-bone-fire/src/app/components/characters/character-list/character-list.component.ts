@@ -16,16 +16,16 @@ export class CharacterListComponent {
   characters: {id: number, name: string}[] = [];
   selectedCharacter?: Character;
 
-  constructor(private characterService: CharactersService) {}
+  constructor(private _characterService: CharactersService) {}
 
   ngOnInit() {
-    this.characterService.getAllCharacters().subscribe(characters => {
+    this._characterService.getAllCharacters().subscribe(characters => {
       this.characters = characters;
     });
   }
 
   selectCharacter(id: number) {
-    this.characterService.getCharacter(id).subscribe(character => {
+    this._characterService.getCharacter(id).subscribe(character => {
       this.selectedCharacter = character;
     });
   }

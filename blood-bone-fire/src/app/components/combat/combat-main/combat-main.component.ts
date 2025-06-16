@@ -1,24 +1,36 @@
-import {Component, ElementRef, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, inject, QueryList, ViewChildren} from '@angular/core';
 import {CharactersService} from '../../../services/characters.service';
 import {Character} from '../../../models/characters.model';
 import {randomInt} from 'toolzy';
 import {CommonModule} from '@angular/common';
 import {forkJoin} from 'rxjs';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-combat-main',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './combat-main.component.html',
   styleUrl: './combat-main.component.scss'
 })
 export class CombatMainComponent {
 
   @ViewChildren('player') _playerList!: QueryList<ElementRef>;
+
+  private _characterService= inject(CharactersService);
+  private _router = inject(Router);
+
+  constructor() {
+    const nav = this._router.getCurrentNavigation();
+    const players = nav?.extras?.state?.['players'];
+    this.charaId1 = players?.[0];
+    this.charaId2 = players?.[1];
+  }
+
   activePlayer = 0;
   players: ElementRef[] = [];
 
-  idPlayer1 = 1;
-  idPlayer2 = 2;
+  charaId1 = 1;
+  charaId2 = 2;
 
   character1: Character = {
     id:0,
@@ -47,15 +59,12 @@ export class CombatMainComponent {
 
   displayedSkills: string[] = [];
 
-  constructor(private characterService: CharactersService) {
-  }
 
   ngAfterViewInit() {
     this.players = this._playerList.toArray();
     this.players[0].nativeElement.classList.toggle('activePlayer');
 
-    forkJoin([this.characterService.getCharacter(this.idPlayer1), this.characterService.getCharacter(this.idPlayer2)]).subscribe(([character1, character2] ) => {
-
+    forkJoin([this._characterService.getCharacter(this.charaId1), this._characterService.getCharacter(this.charaId2)]).subscribe(([character1, character2] ) => {
       this.character1 = character1;
       this.character2 = character2;
       this.getRandomTurnSkills(this.activePlayer);

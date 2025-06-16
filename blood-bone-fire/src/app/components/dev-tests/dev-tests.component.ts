@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
-import {LangSelectorComponent} from '../lang-selector/lang-selector.component';
-import {RouterLink} from '@angular/router';
-import {CombatMainComponent} from '../combat/combat-main/combat-main.component';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-dev-tests',
   imports: [
     TranslatePipe,
-    LangSelectorComponent,
     RouterLink,
-    CombatMainComponent
   ],
   templateUrl: './dev-tests.component.html',
   styleUrl: './dev-tests.component.scss'
 })
 export class DevTestsComponent {
 
-  protected readonly RouterLink = RouterLink;
+    private router = inject(Router);
+
+  soloPlayer() {
+    this.router.navigate(['/character-select'],{state:{numberOfPlayers: 1}}).then();
+  }
+
+  twoPlayers() {
+    this.router.navigate(['/character-select'], {state: {numberOfPlayers: 2}}).then();
+  }
 }

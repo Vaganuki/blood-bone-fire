@@ -1,8 +1,8 @@
 <p>dev-tests works!</p>
 <h1>BLOOD BONE FIRE</h1>
 <h2>{{ 'SUBTITLE' | translate }}</h2>
-<button>{{ 'playButtonVSIA' | translate }}</button>
-<button>{{ 'playButtonVSPLAYER' | translate }}</button>
+<button (click)="soloPlayer()">{{ 'playButtonVSIA' | translate }}</button>
+<button (click)="twoPlayers()">{{ 'playButtonVSPLAYER' | translate }}</button>
 <button [routerLink]="'character-list'">{{ 'charactersButton'|translate }}</button>
 <!--<app-combat-main></app-combat-main>-->
 <!--<app-lang-selector></app-lang-selector>-->

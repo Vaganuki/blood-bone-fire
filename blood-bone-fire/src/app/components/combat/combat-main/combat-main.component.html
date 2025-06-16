@@ -1,11 +1,12 @@
+<button [routerLink]="'/'">BACK HOME</button>
 <div class="devCont">
   <div class="car">
     <div class="devCar">
-      <div class="devSquare red" #player>1</div>
+      <div class="devSquare red" #player>{{character1.name}}</div>
       <div class="devHp">HP:{{ character1?.stats?.hp }}</div>
     </div>
     <div class="devCar">
-      <div class="devSquare blue" #player>2</div>
+      <div class="devSquare blue" #player>{{character2.name}}</div>
       <div class="devHp">HP:{{ character2?.stats?.hp }}</div>
     </div>
   </div>

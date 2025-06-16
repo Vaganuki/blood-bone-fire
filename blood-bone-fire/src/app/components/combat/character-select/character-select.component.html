@@ -1,0 +1,12 @@
+<button [routerLink]="'/'">BACK HOME</button>
+
+<div class="character-list">
+  <h2>Character List</h2>
+  <ul>
+    <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
+        [class.disabled]="isSelected(c.id)">
+      {{ c.name }}
+    </li>
+  </ul>
+</div>
+<button [disabled]="selectedCharacters.length !== numberOfPlayers" (click)="confirmSelection()">CONFIRM</button>
