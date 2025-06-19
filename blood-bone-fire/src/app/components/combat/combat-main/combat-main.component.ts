@@ -5,6 +5,7 @@ import {randomInt} from 'toolzy';
 import {CommonModule} from '@angular/common';
 import {forkJoin} from 'rxjs';
 import {Router, RouterLink} from '@angular/router';
+import {CombatsService} from '../../../services/combats.service';
 
 @Component({
   selector: 'app-combat-main',
@@ -16,59 +17,58 @@ export class CombatMainComponent {
 
   @ViewChildren('player') _playerList!: QueryList<ElementRef>;
 
-  private _characterService= inject(CharactersService);
+  private _characterService = inject(CharactersService);
+  private _combatService = inject(CombatsService);
   private _router = inject(Router);
 
-  constructor() {
-    const nav = this._router.getCurrentNavigation();
-    const players = nav?.extras?.state?.['players'];
-    this.charaId1 = players?.[0];
-    this.charaId2 = players?.[1];
-  }
 
+  numberOfPlayers = this._combatService.getPlayerNumber();
+  selectedCharactersIDs: number[] = [];
   activePlayer = 0;
+
   players: ElementRef[] = [];
 
-  charaId1 = 1;
-  charaId2 = 2;
-
   character1: Character = {
-    id:0,
-    name:'Char1',
-    stats:{
-      hp:0,
-      dexterity:0,
-      intelligence:0,
-      strength:0,
-      mp:0
+    id: 0,
+    name: 'Char1',
+    stats: {
+      hp: 0,
+      dexterity: 0,
+      intelligence: 0,
+      strength: 0,
+      mp: 0
     },
-    skills:[]
+    skills: []
   };
   character2: Character = {
-    id:0,
-    name:'Char2',
-    stats:{
-      hp:0,
-      dexterity:0,
-      intelligence:0,
-      strength:0,
-      mp:0
+    id: 0,
+    name: 'Char2',
+    stats: {
+      hp: 0,
+      dexterity: 0,
+      intelligence: 0,
+      strength: 0,
+      mp: 0
     },
-    skills:[]
+    skills: []
   };
 
   displayedSkills: string[] = [];
 
 
+  ngOnInit() {
+    if (this.numberOfPlayers === 0) this._router.navigate(['/']).then();
+    this.selectedCharactersIDs = this._combatService.getSavedCharactersIDs();
+    forkJoin([this._characterService.getCharacter(this.selectedCharactersIDs[0]), this._characterService.getCharacter(this.selectedCharactersIDs[1])]).subscribe(([character1, character2]) => {
+      this.character1 = {...character1, stats: {...character1.stats}};
+      this.character2 = {...character2, stats: {...character2.stats}};
+      this.getRandomTurnSkills(this.activePlayer);
+    });
+  }
+
   ngAfterViewInit() {
     this.players = this._playerList.toArray();
     this.players[0].nativeElement.classList.toggle('activePlayer');
-
-    forkJoin([this._characterService.getCharacter(this.charaId1), this._characterService.getCharacter(this.charaId2)]).subscribe(([character1, character2] ) => {
-      this.character1 = character1;
-      this.character2 = character2;
-      this.getRandomTurnSkills(this.activePlayer);
-    });
   }
 
   attack() {
@@ -76,7 +76,7 @@ export class CombatMainComponent {
     this.players[1].nativeElement.classList.toggle('activePlayer');
 
     const target = this.activePlayer === 0 ? this.character2 : this.character1;
-    target.stats.hp-=25;
+    target.stats.hp -= 25;
 
     this.activePlayer = this.activePlayer === 0 ? 1 : 0;
 
@@ -87,16 +87,16 @@ export class CombatMainComponent {
     const player = playerId === 1 ? this.character2 : this.character1;
     const selectedSkillsIndex: number[] = [];
     const selectedSkillsName: string[] = [];
-      for (let i = 0; i < 4; i++) {
-        const random = randomInt(0, player!.skills.length - 1);
-        const randomIsSelected = selectedSkillsIndex.includes(random);
-        if (!randomIsSelected) {
-          selectedSkillsIndex.push(random);
-          selectedSkillsName.push(player!.skills[random]);
-        } else {
-          i--;
-        }
+    for (let i = 0; i < 4; i++) {
+      const random = randomInt(0, player!.skills.length - 1);
+      const randomIsSelected = selectedSkillsIndex.includes(random);
+      if (!randomIsSelected) {
+        selectedSkillsIndex.push(random);
+        selectedSkillsName.push(player!.skills[random]);
+      } else {
+        i--;
       }
+    }
     this.displayedSkills = selectedSkillsName;
   }
 }

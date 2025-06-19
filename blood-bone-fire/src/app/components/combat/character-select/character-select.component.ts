@@ -2,8 +2,8 @@ import {Component, inject} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {CharactersService} from '../../../services/characters.service';
 import {Router, RouterLink} from '@angular/router';
-import {Character} from '../../../models/characters.model';
 import {randomInt} from 'toolzy';
+import {CombatsService} from '../../../services/combats.service';
 
 @Component({
   selector: 'app-character-select',
@@ -16,23 +16,23 @@ import {randomInt} from 'toolzy';
 })
 export class CharacterSelectComponent {
 
+  numberOfPlayers = 0;
   characters: { id: number, name: string }[] = [];
   selectedCharacters: number[] = [];
-  numberOfPlayers = 1;
 
   private _characterService = inject(CharactersService);
-  private _router = inject(Router);
-
-
-  constructor() {
-    const nav = this._router.getCurrentNavigation();
-    this.numberOfPlayers = nav?.extras?.state?.['numberOfPlayers'] || 1;
-  }
+  private _combatService = inject(CombatsService);
+  private router = new Router();
 
   ngOnInit() {
+    this.numberOfPlayers = this._combatService.getPlayerNumber();
     this._characterService.getAllCharacters().subscribe(characters => {
       this.characters = characters;
     });
+  }
+
+  ngAfterViewInit() {
+    if (this.numberOfPlayers === 0) this.router.navigate(['/']).then();
   }
 
   selectCharacter(id: number) {
@@ -51,14 +51,16 @@ export class CharacterSelectComponent {
   }
 
   confirmSelection() {
-    if (this.selectedCharacters.length === this.numberOfPlayers) {
-      this._router.navigate(['/fight'], {state: {players: this.selectedCharacters}}).then();
+    if (this.numberOfPlayers === 1) {
+      const randomChar = randomInt(0, this.characters.length - 1);
+      this.selectedCharacters.push(randomChar);
+    }
+    if (this.selectedCharacters.length === 2) {
+      this._combatService.saveCharacter(
+        this.selectedCharacters[0],
+        this.selectedCharacters[1]
+      )
+      this.router.navigate(['/fight']).then();
     }
   }
-
-  // if (this.numberOfPlayers === 1) {
-  //     const randomChar = randomInt(0, this.characters.length - 1);
-  //     const alreadySelected = this.selectedCharacters.find(c => c === randomChar);
-  //
-  // }
 }

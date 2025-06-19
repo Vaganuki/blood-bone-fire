@@ -1,14 +1,9 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {inject} from '@angular/core';
 import {Character} from '../models/characters.model';
 import {Observable, of, throwError} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class CharactersService {
-
-  private readonly _http = inject(HttpClient);
-  private baseUrl = 'assets/data/characters';
 
   private characterList: Character[] = [
     {
@@ -83,8 +78,7 @@ export class CharactersService {
   ]
 
 
-  constructor() {
-  }
+  constructor() {}
 
   getCharacter(id: number): Observable<Character> {
     const character = this.characterList.find(c => c.id === id);

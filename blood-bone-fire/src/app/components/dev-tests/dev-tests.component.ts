@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Router, RouterLink} from '@angular/router';
+import {CombatsService} from '../../services/combats.service';
 
 @Component({
   selector: 'app-dev-tests',
@@ -13,13 +14,13 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class DevTestsComponent {
 
-    private router = inject(Router);
+  private _combatService = inject(CombatsService)
 
-  soloPlayer() {
-    this.router.navigate(['/character-select'],{state:{numberOfPlayers: 1}}).then();
+  soloGame(){
+    this._combatService.soloPlayer();
   }
 
-  twoPlayers() {
-    this.router.navigate(['/character-select'], {state: {numberOfPlayers: 2}}).then();
+  versusGame(){
+    this._combatService.twoPlayers();
   }
 }
