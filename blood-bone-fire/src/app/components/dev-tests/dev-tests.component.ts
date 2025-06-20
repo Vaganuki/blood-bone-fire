@@ -16,6 +16,10 @@ export class DevTestsComponent {
 
   private _combatService = inject(CombatsService)
 
+  ngOnInit() {
+    this._combatService.fullReset();
+  }
+
   soloGame(){
     this._combatService.soloPlayer();
   }

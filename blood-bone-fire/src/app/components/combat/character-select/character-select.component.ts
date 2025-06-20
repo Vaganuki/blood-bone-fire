@@ -25,7 +25,7 @@ export class CharacterSelectComponent {
   private router = new Router();
 
   ngOnInit() {
-    this.numberOfPlayers = this._combatService.getPlayerNumber();
+    this.numberOfPlayers = this._combatService.playerNumber;
     this._characterService.getAllCharacters().subscribe(characters => {
       this.characters = characters;
     });
@@ -51,8 +51,8 @@ export class CharacterSelectComponent {
   }
 
   confirmSelection() {
-    if (this.numberOfPlayers === 1) {
-      const randomChar = randomInt(0, this.characters.length - 1);
+    if (this._combatService.isIAfight) {
+      const randomChar = randomInt(1, this.characters.length);
       this.selectedCharacters.push(randomChar);
     }
     if (this.selectedCharacters.length === 2) {

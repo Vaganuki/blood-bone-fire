@@ -22,7 +22,7 @@ export class CombatMainComponent {
   private _router = inject(Router);
 
 
-  numberOfPlayers = this._combatService.getPlayerNumber();
+  numberOfPlayers = this._combatService.playerNumber;
   selectedCharactersIDs: number[] = [];
   activePlayer = 0;
 
@@ -72,14 +72,17 @@ export class CombatMainComponent {
   }
 
   attack() {
-    this.players[0].nativeElement.classList.toggle('activePlayer');
-    this.players[1].nativeElement.classList.toggle('activePlayer');
 
     const target = this.activePlayer === 0 ? this.character2 : this.character1;
     target.stats.hp -= 25;
 
-    this.activePlayer = this.activePlayer === 0 ? 1 : 0;
-
+    if (!this._combatService.isIAfight) {
+      this.players[0].nativeElement.classList.toggle('activePlayer');
+      this.players[1].nativeElement.classList.toggle('activePlayer');
+      this.activePlayer = this.activePlayer === 0 ? 1 : 0;
+    } else {
+      this.character1.stats.hp -= 25;
+    }
     this.getRandomTurnSkills(this.activePlayer);
   }
 
