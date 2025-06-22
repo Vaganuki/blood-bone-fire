@@ -75,15 +75,19 @@ export class CombatMainComponent {
 
     const target = this.activePlayer === 0 ? this.character2 : this.character1;
     target.stats.hp -= 25;
-
-    if (!this._combatService.isIAfight) {
-      this.players[0].nativeElement.classList.toggle('activePlayer');
-      this.players[1].nativeElement.classList.toggle('activePlayer');
-      this.activePlayer = this.activePlayer === 0 ? 1 : 0;
+    if (target.stats.hp <= 0) {
+      this._combatService.saveVictoriousCharacter(this.selectedCharactersIDs[this.activePlayer]);
+      this._router.navigate(['/ending-screen']).then();
     } else {
-      this.character1.stats.hp -= 25;
+      if (!this._combatService.isIAfight) {
+        this.players[0].nativeElement.classList.toggle('activePlayer');
+        this.players[1].nativeElement.classList.toggle('activePlayer');
+        this.activePlayer = this.activePlayer === 0 ? 1 : 0;
+      } else {
+        this.character1.stats.hp -= 25;
+      }
+      this.getRandomTurnSkills(this.activePlayer);
     }
-    this.getRandomTurnSkills(this.activePlayer);
   }
 
   getRandomTurnSkills(playerId: number) {

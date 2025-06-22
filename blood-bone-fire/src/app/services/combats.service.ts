@@ -6,6 +6,7 @@ export class CombatsService {
   playerNumber = 0;
   savedCharacters: number[] = [];
   isIAfight: boolean = false;
+  victoriousCharacter = 0;
 
   soloPlayer() {
     this.playerNumber = 1;
@@ -16,19 +17,24 @@ export class CombatsService {
     this.playerNumber = 2;
   }
 
+  saveVictoriousCharacter(id: number) {
+    this.victoriousCharacter = id;
+  }
+
   saveCharacter(left: number, right: number) {
     this.savedCharacters.push(left);
     this.savedCharacters.push(right);
-    console.log(this.savedCharacters);
   }
+
   getSavedCharactersIDs() {
     return this.savedCharacters;
   }
 
-  fullReset(){
+  fullReset() {
     this.resetSelectedCharacters();
     this.resetIAselect();
     this.resetPlayerNumber();
+    this.resetVictoriousCharacter();
   }
 
   resetPlayerNumber() {
@@ -38,7 +44,12 @@ export class CombatsService {
   resetSelectedCharacters() {
     this.savedCharacters = [];
   }
-  resetIAselect(){
+
+  resetIAselect() {
     this.isIAfight = false;
+  }
+
+  resetVictoriousCharacter() {
+    this.victoriousCharacter = 0;
   }
 }

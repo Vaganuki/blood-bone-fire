@@ -80,9 +80,10 @@ export class CharactersService {
 
   constructor() {}
 
-  getCharacter(id: number): Observable<Character> {
+  getCharacter(id: number):Observable<Character> {
     const character = this.characterList.find(c => c.id === id);
-    return character ? of(character) : throwError(() => new Error('Character not found'));}
+    return character ? of(character) : throwError(() => new Error('Character not found'));
+  }
 
   getAllCharacters(): Observable<{ id: number, name: string }[]> {
     const allCharacters : {"id":number, "name": string}[]  = this.characterList.map(c => ({id: c.id, name: c.name}));
