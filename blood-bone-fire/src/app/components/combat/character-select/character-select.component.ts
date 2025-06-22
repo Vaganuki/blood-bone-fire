@@ -19,6 +19,7 @@ export class CharacterSelectComponent {
   numberOfPlayers = 0;
   characters: { id: number, name: string }[] = [];
   selectedCharacters: number[] = [];
+  isFirstPlayerChoosing = true;
 
   private _characterService = inject(CharactersService);
   private _combatService = inject(CombatsService);
@@ -36,13 +37,13 @@ export class CharacterSelectComponent {
   }
 
   selectCharacter(id: number) {
-    const alreadySelected = this.selectedCharacters.find(c => c === id);
-    if (alreadySelected) {
-      return;
-    }
     const selected = this.characters.find(c => c.id === id);
     if (selected && this.selectedCharacters.length < this.numberOfPlayers) {
       this.selectedCharacters.push(selected.id);
+      if (this.numberOfPlayers > 1) this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;
+    } else {
+      this.isFirstPlayerChoosing ? this.selectedCharacters[0] = id : this.selectedCharacters[1] = id;
+      if (this.numberOfPlayers > 1) this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;
     }
   }
 
