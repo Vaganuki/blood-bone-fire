@@ -51,6 +51,14 @@ export class CharacterSelectComponent {
     return this.selectedCharacters.some(c => c === id);
   }
 
+  isChosenByPlayer1(id: number) {
+    return id === this.selectedCharacters[0];
+  }
+
+  isChosenByPlayer2(id: number) {
+    return id === this.selectedCharacters[1];
+  }
+
   confirmSelection() {
     if (this._combatService.isIAfight) {
       const randomChar = randomInt(1, this.characters.length);

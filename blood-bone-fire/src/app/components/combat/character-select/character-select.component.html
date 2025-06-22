@@ -3,7 +3,8 @@
 <div class="character-list">
   <h2>Character List</h2>
   <ul>
-    <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)">
+    <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
+        [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">
       {{ c.name }}
     </li>
   </ul>

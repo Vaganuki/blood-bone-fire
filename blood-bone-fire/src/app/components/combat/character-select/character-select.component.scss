@@ -6,3 +6,43 @@
 .disabled {
   pointer-events: none; // Empêche de re-cliquer
 }
+
+
+.player1 {
+  position: relative;
+  color: #f55;
+
+  &:after {
+    content: 'P1';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: crimson;
+    color: white;
+    font-weight: bold;
+    font-size: 0.6rem;
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    transform: translate(30%, -30%);
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+  }
+}
+.player2 {
+  position: relative;
+  color: #5577ff;
+
+  &:after {
+    content: 'P2';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #143cdc;
+    color: white;
+    font-weight: bold;
+    font-size: 0.6rem;
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    transform: translate(30%, -30%);
+    box-shadow: 0 0 5px rgba(0, 42, 255, 0.6);
+  }
+}
