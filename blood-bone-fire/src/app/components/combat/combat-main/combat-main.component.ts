@@ -89,7 +89,6 @@ export class CombatMainComponent {
         // I suppose I added this as a dev temp to see if functions work (I haven't touched this code for 7 months)
         this.character1.stats.hp -= 25;
         //New code for dev purpose
-          console.log(target)
         if (this.character1.stats.hp <= 0) {
           this._combatService.saveVictoriousCharacter(target.id); //Instead of searching for a char, here we can just take the IA's
           this._router.navigate(['/ending-screen']).then();

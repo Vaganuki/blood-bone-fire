@@ -82,11 +82,28 @@ export class CharactersService {
 
   getCharacter(id: number):Observable<Character> {
     const character = this.characterList.find(c => c.id === id);
-    return character ? of(character) : throwError(() => new Error('Character not found'));
+    if(!character) {
+      return throwError(() => new Error("Character not found"));
+    }
+
+    return of({
+      ...character,
+      stats:{...character.stats},
+      baseStats:{...character.baseStats},
+      statusEffects:[],
+    });
+
   }
 
   getAllCharacters(): Observable<{ id: number, name: string }[]> {
-    const allCharacters : {"id":number, "name": string}[]  = this.characterList.map(c => ({id: c.id, name: c.name}));
+    const allCharacters = this.characterList.map(c => ({
+      id: c.id,
+      name: c.name,
+    }));
     return of(allCharacters);
+  }
+
+  createCombatInstance(id: number): Observable<Character> {
+    return this.getCharacter(id);
   }
 }
