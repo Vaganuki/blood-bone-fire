@@ -76,15 +76,24 @@ export class CombatMainComponent {
     const target = this.activePlayer === 0 ? this.character2 : this.character1;
     target.stats.hp -= 25;
     if (target.stats.hp <= 0) {
+      //If a player has no HP, then ending screen
       this._combatService.saveVictoriousCharacter(this.selectedCharactersIDs[this.activePlayer]);
       this._router.navigate(['/ending-screen']).then();
     } else {
       if (!this._combatService.isIAfight) {
+        //Switching active player when this isn't an IA game
         this.players[0].nativeElement.classList.toggle('activePlayer');
         this.players[1].nativeElement.classList.toggle('activePlayer');
         this.activePlayer = this.activePlayer === 0 ? 1 : 0;
       } else {
+        // I suppose I added this as a dev temp to see if functions work (I haven't touched this code for 7 months)
         this.character1.stats.hp -= 25;
+        //New code for dev purpose
+          console.log(target)
+        if (this.character1.stats.hp <= 0) {
+          this._combatService.saveVictoriousCharacter(target.id); //Instead of searching for a char, here we can just take the IA's
+          this._router.navigate(['/ending-screen']).then();
+        }
       }
       this.getRandomTurnSkills(this.activePlayer);
     }
