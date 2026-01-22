@@ -5,10 +5,12 @@
     <div class="devCar">
       <div class="devSquare red" #player>{{ character1.name }}</div>
       <div class="devHp">HP:{{ character1.stats.hp }}</div>
+      <div>MP: {{character1.stats.mp}}</div>
     </div>
     <div class="devCar">
       <div class="devSquare blue" #player>{{ character2.name }}</div>
       <div class="devHp">HP:{{ character2.stats.hp }}</div>
+      <div>MP: {{character2.stats.mp}}</div>
     </div>
   </div>
   <div class="atak">
@@ -16,7 +18,9 @@
     <ul>
       <li *ngFor="let skill of displayedSkills">
         <button (click)="useSkill(skill)">
-          {{ skill.name }}
+            <div>{{ skill.name }}</div>
+            <div>{{ skill.description }}</div>
+            <div>COUT :{{ skill.mpCost}}</div>
         </button>
 
       </li>

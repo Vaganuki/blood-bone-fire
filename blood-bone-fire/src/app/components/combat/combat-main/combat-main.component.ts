@@ -138,6 +138,16 @@ export class CombatMainComponent {
   getRandomTurnSkills() {
     const player = this.activePlayer === 0 ? this.character1 : this.character2;
     this.displayedSkills = this._skillsService.getRandomTurnSkills(player);
+
+    const usableSkills = this.displayedSkills.filter(skill => this._skillsService.canUseSkill(skill, player).canUse);
+    if (usableSkills.length === 0) {
+      this.addLog({
+        message: `${player.name} ne peut pas agir !`,
+        type: 'info'
+      });
+      this.switchPlayer();
+      return;
+    }
   }
 
   canUseSkill(skill: Skill): boolean {
