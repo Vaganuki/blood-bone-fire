@@ -21,12 +21,7 @@ export class EndingScreenComponent {
   winnerName: string = '';
 
   ngOnInit() {
-    if (this._combatService.victoriousCharacter === 0) this._router.navigate(['/']).then();
-    const c = this._characterService.getCharacter(this._combatService.victoriousCharacter)
-      .subscribe({
-        next: (c) => this.winnerName = c.name,
-        error: () => this.winnerName = '???'
-      });
+
   }
 
 }

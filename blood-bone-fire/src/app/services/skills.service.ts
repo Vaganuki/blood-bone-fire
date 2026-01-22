@@ -1,6 +1,9 @@
 import {Skill, SkillEffect} from '../models/skills.model';
 import {Character} from '../models/characters.model';
 import {StatusEffectsService} from './status-effects.service';
+import {CHARACTER_SKILLS, COMMON_SKILLS} from '../datas/skills.data';
+import {inject, Injectable} from '@angular/core';
+import {randomInt} from 'toolzy';
 
 @Injectable({providedIn: 'root'})
 export class SkillsService {

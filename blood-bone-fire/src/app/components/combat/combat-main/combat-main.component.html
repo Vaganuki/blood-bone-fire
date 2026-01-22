@@ -13,11 +13,10 @@
   </div>
   <div class="atak">
 
-    <button (click)="attack()">UP B</button>
     <ul>
       <li *ngFor="let skill of displayedSkills">
-        <button (click)="attack()">
-          {{ skill }}
+        <button (click)="useSkill(skill)">
+          {{ skill.name }}
         </button>
 
       </li>

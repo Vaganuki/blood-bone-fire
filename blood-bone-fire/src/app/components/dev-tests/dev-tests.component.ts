@@ -14,17 +14,20 @@ import {CombatsService} from '../../services/combats.service';
 })
 export class DevTestsComponent {
 
-  private _combatService = inject(CombatsService)
+  private _combatService = inject(CombatsService);
+  private _router = inject(Router);
 
   ngOnInit() {
     this._combatService.fullReset();
   }
 
   soloGame(){
-    this._combatService.soloPlayer();
+    this._combatService.initSoloGame();
+    this._router.navigate(['/character-select']).then();
   }
 
   versusGame(){
-    this._combatService.twoPlayers();
+    this._combatService.initVersusGame();
+    this._router.navigate(['/character-select']).then();
   }
 }

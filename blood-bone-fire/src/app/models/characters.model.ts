@@ -13,7 +13,6 @@ export interface Character {
   name: string;
   stats:CharacterStats;
   baseStats: CharacterStats;
-  statusEffects: null; // Will add status later on
+  statusEffects: [] | null; // Will add status later on
   mpRegenPerTurn: number;
-  skills?: string[];
 }

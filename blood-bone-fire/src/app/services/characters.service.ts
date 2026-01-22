@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Character} from '../models/characters.model';
 import {Observable, of, throwError} from 'rxjs';
+import {CHARACTERS_DATA} from '../datas/characters.data';
 
 @Injectable({providedIn: 'root'})
 export class CharactersService {
 
-  constructor() {}
+  private characterList: Character[] = CHARACTERS_DATA;
 
   getCharacter(id: number):Observable<Character> {
     const character = this.characterList.find(c => c.id === id);
@@ -17,9 +18,8 @@ export class CharactersService {
       ...character,
       stats:{...character.stats},
       baseStats:{...character.baseStats},
-      statusEffects:[],
+      statusEffects:null,
     });
-
   }
 
   getAllCharacters(): Observable<{ id: number, name: string }[]> {

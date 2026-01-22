@@ -1,9 +1,11 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {CharactersService} from '../../../services/characters.service';
 import {Router, RouterLink} from '@angular/router';
 import {randomInt} from 'toolzy';
 import {CombatsService} from '../../../services/combats.service';
+import {Subject, takeUntil} from 'rxjs';
+import {GameMode} from '../../../models/combat-state.model';
 
 @Component({
   selector: 'app-character-select',
@@ -14,41 +16,62 @@ import {CombatsService} from '../../../services/combats.service';
   templateUrl: './character-select.component.html',
   styleUrl: './character-select.component.scss'
 })
-export class CharacterSelectComponent {
+export class CharacterSelectComponent implements OnDestroy {
 
-  numberOfPlayers = 0;
+  private destroy$ = new Subject<void>();
+  private _characterService = inject(CharactersService);
+  private _combatService = inject(CombatsService);
+  private _router = new Router();
+
+  gameMode: GameMode = null;
+  isIaOpponent = false;
   characters: { id: number, name: string }[] = [];
   selectedCharacters: number[] = [];
   isFirstPlayerChoosing = true;
 
-  private _characterService = inject(CharactersService);
-  private _combatService = inject(CombatsService);
-  private router = new Router();
-
   ngOnInit() {
-    this.numberOfPlayers = this._combatService.playerNumber;
+    this._combatService.combatState$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(state => {
+        this.gameMode = state.gameMode;
+        this.isIaOpponent = state.isIaOpponent;
+      });
+
+    if (!this._combatService.canSelectCharacters()) {
+      this._router.navigate(['/']).then();
+      return;
+    }
+
     this._characterService.getAllCharacters().subscribe(characters => {
       this.characters = characters;
     });
   }
 
-  ngAfterViewInit() {
-    if (this.numberOfPlayers === 0) this.router.navigate(['/']).then();
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   selectCharacter(id: number) {
-    const selected = this.characters.find(c => c.id === id);
-    if (selected && this.selectedCharacters.length < this.numberOfPlayers) {
-      this.selectedCharacters.push(selected.id);
-      if (this.numberOfPlayers > 1) this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;
-    } else {
-      this.isFirstPlayerChoosing ? this.selectedCharacters[0] = id : this.selectedCharacters[1] = id;
-      if (this.numberOfPlayers > 1) this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;
+    if (this.gameMode === 'solo') {
+      this.selectedCharacters = [id];
+    } else if (this.gameMode === 'versus') {
+      if (this.selectedCharacters.length < 2) {
+        this.selectedCharacters.push(id);
+        this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;
+      } else {
+        if (this.isFirstPlayerChoosing) {
+          this.selectedCharacters[0] = id;
+        } else {
+          this.selectedCharacters[1] = id;
+        }
+        this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;
+      }
     }
   }
 
   isSelected(id: number): boolean {
-    return this.selectedCharacters.some(c => c === id);
+    return this.selectedCharacters.includes(id);
   }
 
   isChosenByPlayer1(id: number) {
@@ -60,16 +83,45 @@ export class CharacterSelectComponent {
   }
 
   confirmSelection() {
-    if (this._combatService.isIAfight) {
-      const randomChar = randomInt(1, this.characters.length);
-      this.selectedCharacters.push(randomChar);
+    console.log(this.selectedCharacters);
+    if (this.gameMode === 'solo') {
+      if (this.selectedCharacters.length === 1) {
+        let iaCharacterId: number;
+        do {
+          iaCharacterId = randomInt(1, this.characters.length);
+        } while (iaCharacterId === this.selectedCharacters[0]);
+
+        this._combatService.setCharacters(this.selectedCharacters[0], this.selectedCharacters[1]);
+        this._router.navigate(['/fight']).then();
+      }
+    } else if (this.gameMode === 'versus') {
+      if (this.selectedCharacters.length === 2) {
+        this._combatService.setCharacters(this.selectedCharacters[0], this.selectedCharacters[1]);
+        this._router.navigate(['/fight']).then();
+      }
     }
-    if (this.selectedCharacters.length === 2) {
-      this._combatService.saveCharacter(
-        this.selectedCharacters[0],
-        this.selectedCharacters[1]
-      )
-      this.router.navigate(['/fight']).then();
+  }
+
+  canConfirm(): boolean {
+    if (this.gameMode === 'solo') {
+      return this.selectedCharacters.length === 1;
+    } else if (this.gameMode === 'versus') {
+      return this.selectedCharacters.length === 2;
+    }
+    return false;
+  }
+
+  getSelectionMessage(): string {
+    if (this.gameMode === 'solo') {
+      return 'Choisissez votre héros';
+    } else {
+      if (this.selectedCharacters.length === 0) {
+        return 'Joueur 1, choisissez votre héros';
+      } else if (this.selectedCharacters.length === 1) {
+        return 'Joueur 2, choisissez votre héros';
+      } else {
+        return `Joueur ${this.isFirstPlayerChoosing ? '1' : '2'}, changez de héros si vous le souhaitez`;
+      }
     }
   }
 }

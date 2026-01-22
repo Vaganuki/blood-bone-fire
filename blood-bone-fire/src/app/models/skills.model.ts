@@ -11,7 +11,7 @@ export interface Skill {
   scalingStat?: ScalingStat;
   scalingRatio?: number;
   isCommon?: boolean;
-  statusEffects?: null; // will add status later
+  statusEffects?: any; // will add status later
   targetSelf?: boolean; // True for healing, buffs and stuff owo
 }
 

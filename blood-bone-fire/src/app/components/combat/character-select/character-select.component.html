@@ -1,5 +1,8 @@
 <button [routerLink]="'/'">BACK HOME</button>
-
+  <div class="header">
+    <h1>Sélection des personnages</h1>
+    <p class="selection-message">{{getSelectionMessage()}}</p>
+  </div>
 <div class="character-list">
   <h2>Character List</h2>
   <ul>
@@ -9,4 +12,4 @@
     </li>
   </ul>
 </div>
-<button [disabled]="selectedCharacters.length !== numberOfPlayers" (click)="confirmSelection()">CONFIRM</button>
+<button [disabled]="!canConfirm()" (click)="confirmSelection()">CONFIRM</button>

@@ -30,8 +30,6 @@ export const COMMON_SKILLS: Skill[] = [
     baseDamage: 0,
     mpCost: 0,
     type: 'physical',
-    scalingStat: null,
-    scalingRatio: null,
     isCommon: true,
   },
   {
@@ -171,7 +169,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       baseDamage: 5,
       mpCost: 15,
       type: 'special',
-      scalingStat: 'dex',
+      scalingStat: 'dexterity',
       scalingRatio: 1,
       statusEffects: [
         //Add poison
