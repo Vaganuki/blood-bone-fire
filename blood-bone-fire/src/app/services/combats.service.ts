@@ -71,14 +71,6 @@ export class CombatsService {
     });
   }
 
-  // In case we'd be in a solo game, set just one character
-  setPlayer1Character(player1ID: number): void {
-    this.updateState({
-      ...this.currentState,
-      player1CharacterID: player1ID,
-    });
-  }
-
   setWinnerID(winnerID: number): void {
     this.updateState({
       ...this.currentState,
@@ -89,7 +81,7 @@ export class CombatsService {
   incrementTurn(): void {
     this.updateState({
       ...this.currentState,
-      currentTurn: this.currentState.currentTurn++,
+      currentTurn: this.currentState.currentTurn + 1,
     });
   }
 

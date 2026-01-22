@@ -51,6 +51,7 @@ export class CombatMainComponent {
       return;
     }
 
+
     this._combatService.combatState$
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
@@ -58,9 +59,9 @@ export class CombatMainComponent {
         this.activePlayer = state.activePlayerID;
         this.currentTurn = state.currentTurn;
       });
-
+    console.log(this._combatService.combatState$);
     const charactersIDs = this._combatService.getCharacterIDs();
-
+    console.log('charactersIDs', charactersIDs);
     forkJoin([this._characterService.getCharacter(charactersIDs[0]), this._characterService.getCharacter(charactersIDs[1])])
       .subscribe(([selected1, selected2]) => {
         this.character1 = selected1;
@@ -72,6 +73,8 @@ export class CombatMainComponent {
         this._combatService.incrementTurn();
         this.getRandomTurnSkills();
       });
+
+    console.log(this.character1);
   }
 
   ngAfterViewInit() {
@@ -121,12 +124,15 @@ export class CombatMainComponent {
     //     });
     //   });
     // }
-    if (this.character1.stats.hp <= 0){
-      this.endCombat(this.character2);
+    if (target.stats.hp <= 0) {
+      this.endCombat(attacker);
       return;
     }
-
-    setTimeout(() => this.switchPlayer(), 1000);
+    if (this.isIaOpponent && this.activePlayer === 0) {
+      this.aiTurn()
+    } else {
+      this.switchPlayer();
+    }
   }
 
   getRandomTurnSkills() {
@@ -134,12 +140,12 @@ export class CombatMainComponent {
     this.displayedSkills = this._skillsService.getRandomTurnSkills(player);
   }
 
-  canUseSkill(skill: Skill):boolean {
+  canUseSkill(skill: Skill): boolean {
     const attacker = this.activePlayer === 0 ? this.character1 : this.character2;
     return this._skillsService.canUseSkill(skill, attacker).canUse;
   }
 
-  getSkillEffect(skill: Skill):SkillEffect {
+  getSkillEffect(skill: Skill): SkillEffect {
     const attacker = this.activePlayer === 0 ? this.character1 : this.character2;
     return this._skillsService.canUseSkill(skill, attacker);
   }
@@ -153,7 +159,7 @@ export class CombatMainComponent {
     if (this.activePlayer === 0) {
       this._combatService.incrementTurn();
       this.addLog({
-        message:`--- Tour ${this.currentTurn} ---`,
+        message: `--- Tour ${this.currentTurn} ---`,
         type: 'info'
       });
     }
@@ -173,12 +179,57 @@ export class CombatMainComponent {
     const mpRegen = this._skillsService.regenerateMP(currentCharacter);
     if (mpRegen > 0) {
       this.addLog({
-        message:`${currentCharacter.name} régénère ${mpRegen} MP`,
+        message: `${currentCharacter.name} régénère ${mpRegen} MP`,
         type: 'info'
       });
     }
 
     this.getRandomTurnSkills();
+  }
+
+  private aiTurn() {
+    this.switchPlayer();
+
+    const aiSkills = this._skillsService.getRandomTurnSkills(this.character2);
+
+    const usableSkills = aiSkills.filter(skill => this._skillsService.canUseSkill(skill, this.character2).canUse);
+    if (usableSkills.length === 0) {
+      this.addLog({
+        message: `${this.character2.name} ne peut pas agir !`,
+        type: 'info'
+      });
+      this.switchPlayer();
+      return;
+    }
+
+    const randomSkill = usableSkills[Math.floor(Math.random() * usableSkills.length)];
+    this.lastSkillEffect = this._skillsService.applySkill(
+      randomSkill,
+      this.character2,
+      this.character1,
+      this.currentTurn
+    );
+
+    if (randomSkill.type === 'heal') {
+      this.addLog({
+        message: `${this.character2.name} utilise ${randomSkill.name} et récupère ${this.lastSkillEffect.damage} HP !`,
+        type: 'heal'
+      });
+    } else {
+      this.addLog({
+        message: `${this.character2.name} utilise ${randomSkill.name} et inflige ${this.lastSkillEffect.damage} dégâts !`,
+        type: 'damage'
+      });
+    }
+
+    //status effect
+
+    if (this.character1.stats.hp <= 0) {
+      this.endCombat(this.character2);
+      return;
+    }
+
+    this.switchPlayer();
   }
 
   private endCombat(winner: Character) {
@@ -187,15 +238,10 @@ export class CombatMainComponent {
       type: 'info'
     });
     this._combatService.setWinnerID(winner.id);
-    setTimeout(()=> {
-      this._router.navigate(['/ending-screen']).then();
-    }, 2000);
+    this._router.navigate(['/ending-screen']).then();
   }
 
   private addLog(log: CombatLog) {
     this.combatLog.push(log);
-    // if(this.combatLog.length > 10) {
-    //   this.combatLog.shift();
-    // }
   }
 }

@@ -89,8 +89,12 @@ export class CharacterSelectComponent implements OnDestroy {
         let iaCharacterId: number;
         do {
           iaCharacterId = randomInt(1, this.characters.length);
+          console.log(iaCharacterId);
         } while (iaCharacterId === this.selectedCharacters[0]);
 
+        this.selectedCharacters[1] = iaCharacterId;
+
+        console.log(this.selectedCharacters);
         this._combatService.setCharacters(this.selectedCharacters[0], this.selectedCharacters[1]);
         this._router.navigate(['/fight']).then();
       }
