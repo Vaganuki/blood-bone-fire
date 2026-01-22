@@ -59,7 +59,7 @@ export class SkillsService {
       };
     }
 
-    // check if silenced effect later
+    //TODO check if silenced effect later
 
     //checking MPs
     const canUse = attacker.stats.mp >= skill.mpCost;
@@ -95,7 +95,7 @@ export class SkillsService {
       actualTarget.stats.hp -= effect.damage;
     }
 
-    // add status effects here later
+    //TODO add status effects here later
 
     return effect;
   }

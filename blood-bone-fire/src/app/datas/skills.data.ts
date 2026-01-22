@@ -1,17 +1,6 @@
 import {Skill} from '../models/skills.model';
 
 export const COMMON_SKILLS: Skill[] = [
-  // {
-  //   id: '',
-  //   name:'',
-  //   description:'',
-  //   baseDamage:0,
-  //   mpCost:0,
-  //   type:'physical',
-  //   scalingStat: null,
-  //   scalingRatio: null,
-  //   isCommon: true,
-  // },
   {
     id: 'common_basic_attack',
     name: 'Attaque basique',
@@ -77,7 +66,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'dexterity',
       scalingRatio: 1.3,
       statusEffects: [
-        //add weaken
+        //TODO add weaken
       ]
     },
     {
@@ -90,7 +79,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 1.4,
       statusEffects: [
-        //Add stun
+        //TODO Add stun
       ]
     },
     {
@@ -103,7 +92,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 0.8,
       statusEffects: [
-        //Add regen
+        //TODO Add regen
       ]
     },
     {
@@ -116,7 +105,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'strength',
       scalingRatio: 3,
       statusEffects: [
-        //Add dext boost
+        //TODO Add dext boost
       ]
     },
     {
@@ -129,7 +118,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 1.0,
       statusEffects: [
-        //Add silence
+        //TODO Add silence
       ]
     },
   ],
@@ -145,7 +134,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingRatio: 1.4,
       targetSelf: true,
       statusEffects: [
-        //dex boost here
+        //TODO dex boost here
       ]
     },
     {
@@ -159,7 +148,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingRatio: 1,
       targetSelf: true,
       statusEffects: [
-        //stun for a turn
+        //TODO stun for a turn
       ]
     },
     {
@@ -172,7 +161,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'dexterity',
       scalingRatio: 1,
       statusEffects: [
-        //Add poison
+        //TODO Add poison
       ]
     },
     {
@@ -185,7 +174,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 1,
       statusEffects: [
-        //Add burn
+        //TODO Add burn
       ]
     },
     {
@@ -198,7 +187,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'dexterity',
       scalingRatio: 1,
       statusEffects: [
-        //Add weaken
+        //TODO Add weaken
       ]
     },
     {
@@ -211,7 +200,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'dexterity',
       scalingRatio: 1.0,
       statusEffects: [
-        //Add atk boost
+        //TODO Add atk boost
       ]
     },
   ]

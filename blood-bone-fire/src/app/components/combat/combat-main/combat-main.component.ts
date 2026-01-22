@@ -166,7 +166,7 @@ export class CombatMainComponent {
 
     const currentCharacter = this.activePlayer === 0 ? this.character1 : this.character2
 
-    // treat status
+    //TODO treat status
 
     if (currentCharacter.stats.hp <= 0) {
       const winner = this.activePlayer === 0 ? this.character1 : this.character2;
@@ -174,7 +174,7 @@ export class CombatMainComponent {
       return;
     }
 
-    //expire effects
+    //TODO expire effects
 
     const mpRegen = this._skillsService.regenerateMP(currentCharacter);
     if (mpRegen > 0) {
@@ -222,7 +222,7 @@ export class CombatMainComponent {
       });
     }
 
-    //status effect
+    //TODO status effect
 
     if (this.character1.stats.hp <= 0) {
       this.endCombat(this.character2);

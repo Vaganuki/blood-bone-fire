@@ -13,6 +13,6 @@ export interface Character {
   name: string;
   stats:CharacterStats;
   baseStats: CharacterStats;
-  statusEffects: [] | null; // Will add status later on
+  statusEffects: [] | null; //TODO Will add status later on
   mpRegenPerTurn: number;
 }

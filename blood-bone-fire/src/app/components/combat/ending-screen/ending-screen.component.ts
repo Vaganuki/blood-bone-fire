@@ -21,7 +21,7 @@ export class EndingScreenComponent {
   winnerName: string = '';
 
   ngOnInit() {
-
+    //TODO : tout
   }
 
 }

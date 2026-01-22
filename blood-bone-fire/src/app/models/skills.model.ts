@@ -11,7 +11,7 @@ export interface Skill {
   scalingStat?: ScalingStat;
   scalingRatio?: number;
   isCommon?: boolean;
-  statusEffects?: any; // will add status later
+  statusEffects?: any; // TODO will add status later
   targetSelf?: boolean; // True for healing, buffs and stuff owo
 }
 
@@ -19,6 +19,6 @@ export interface SkillEffect {
   damage: number;
   mpUsed: number;
   canUse: boolean;
-  reason?: string; //Will be null if the skill can be used obv
-  appliedEffects?: null; // will add status later
+  reason?: string; // TODO Will be null if the skill can be used obv
+  appliedEffects?: null; //TODO will add status later
 }
