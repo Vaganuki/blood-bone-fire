@@ -8,12 +8,38 @@
         <div class="combat-chara-name">{{ character1.name }}</div>
         <div class="devHp">HP:{{ character1.stats.hp }}</div>
         <div class="devMp">MP: {{ character1.stats.mp }}</div>
+        <ul>
+          <li>STR : {{character1.stats.strength}}</li>
+          <li>DEX : {{character1.stats.dexterity}}</li>
+          <li>INT : {{character1.stats.intelligence}}</li>
+        </ul>
+        @if (character1.statusEffects) {
+          <ul>
+            @for (eff of character1.statusEffects; track eff.name) {
+              <li>{{eff.name}} ({{eff.duration}})</li>
+            }
+          </ul>
+        }
       </div>
 
       <div class="combat-chara" #player>
         <div class="combat-chara-name">{{ character2.name }}</div>
         <div class="devHp">HP:{{ character2.stats.hp }}</div>
         <div class="devMp">MP: {{ character2.stats.mp }}</div>
+        <div class="combat-chara-stat">
+          <ul>
+            <li>STR : {{character2.stats.strength}}</li>
+            <li>DEX : {{character2.stats.dexterity}}</li>
+            <li>INT : {{character2.stats.intelligence}}</li>
+          </ul>
+          @if (character2.statusEffects) {
+            <ul>
+              @for (eff of character2.statusEffects; track eff.name) {
+                <li>{{eff.name}} ({{eff.duration}})</li>
+              }
+            </ul>
+          }
+        </div>
       </div>
     </div>
 
