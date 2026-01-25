@@ -49,4 +49,28 @@ export const CHARACTERS_DATA: Character[] = [
     statusEffects: [],
     mpRegenPerTurn: 10,
   },
+  {
+    id:3,
+    name:'Mozarrelli le conquérant',
+    stats:{
+      hp: 200,
+      maxHp: 200,
+      mp: 100,
+      maxMp: 100,
+      strength: 18,
+      dexterity: 10,
+      intelligence: 2,
+    },
+    baseStats:{
+      hp: 200,
+      maxHp: 200,
+      mp: 100,
+      maxMp: 100,
+      strength: 18,
+      dexterity: 10,
+      intelligence: 2,
+    },
+    statusEffects:[],
+    mpRegenPerTurn: 20,
+  }
 ];

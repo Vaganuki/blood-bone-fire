@@ -265,5 +265,113 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
         }
       ]
     },
+  ],
+  3: [
+    {
+      id:'mozarrelli_skill_1',
+      name:'Les crocs',
+      description: 'Mord l\'adversaire',
+      baseDamage: 10,
+      mpCost: 20,
+      type: 'physical',
+      scalingStat: 'strength',
+      scalingRatio: 1.3,
+    },
+    {
+      id:'mozarrelli_skill_2',
+      name:'Doux parfum',
+      description:'Renifle sa propre odeur',
+      baseDamage: 0,
+      mpCost: 20,
+      type: 'special',
+      statusEffects:[
+        {
+          type:'boost_str',
+          name:'Fureur',
+          description:'Force augmentée',
+          duration: 10,
+          potency: 20,
+        },
+        {
+          type:'poison',
+          name:'Empoisonné',
+          description:'Perd des HP tous les tours',
+          duration: 3,
+          potency: 0.1,
+        }
+      ]
+    },
+    {
+      id:'mozarrelli_skill_3',
+      name:'Attrappe poule',
+      description:'Attrappe les pieds de l\'adversaire',
+      baseDamage: 10,
+      mpCost:20,
+      type: 'special',
+      scalingStat: 'strength',
+      scalingRatio: 1,
+      statusEffects:[
+        {
+          type: 'stun',
+          name: 'Etourdi',
+          description: 'Ne peut pas agir',
+          duration: 3,
+          potency: 0,
+        }
+      ]
+    },
+    {
+      id:'mozarrelli_skill_4',
+      name:'Table basse',
+      description:'On en parlera pas',
+      baseDamage:0,
+      mpCost:20,
+      type: 'special',
+      scalingStat: 'strength',
+      scalingRatio: 1,
+      statusEffects:[
+        {
+          type: 'poison',
+          name: 'Empoisonné',
+          description: 'Perd des HP tous les tours',
+          duration: 3,
+          potency: 0.15,
+        },
+        {
+          type: 'burn',
+          name: 'Brulure',
+          description: 'Perd des HP tous les tours',
+          duration: 3,
+          potency: 30,
+        }
+      ]
+    },
+    {
+      id:'mozarrelli_skill_5',
+      name:'Coup de pelle',
+      description:'Attaque l\'adversaire avec une pelle',
+      baseDamage:30,
+      mpCost:20,
+      type: 'special',
+      scalingStat: 'strength',
+      scalingRatio: 1,
+    },
+    {
+      id:'mozarrelli_skill_6',
+      name:'Réflexion',
+      description:'CONCENTRE TOI',
+      baseDamage:0,
+      mpCost:20,
+      type: 'magical',
+      statusEffects:[
+        {
+          type: 'boost_int',
+          name: 'Clairvoyance',
+          description: 'Intelligence boostée',
+          duration: 10,
+          potency: 300,
+        }
+      ]
+    }
   ]
 };
