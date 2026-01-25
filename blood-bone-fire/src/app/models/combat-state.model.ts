@@ -7,7 +7,7 @@ export interface CombatState {
   isIaOpponent: boolean;
   currentTurn: number;
   activePlayerID: number | null;
-  winnerID: number | null;
+  winnerID: number;
 }
 
 export interface CombatLog {
@@ -22,6 +22,6 @@ export const INITIAL_COMBAT_STATE: CombatState = {
   isIaOpponent: false,
   currentTurn: 0,
   activePlayerID: 0,
-  winnerID: null,
+  winnerID: 0,
 };
 

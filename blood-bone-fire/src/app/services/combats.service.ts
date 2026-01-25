@@ -29,7 +29,7 @@ export class CombatsService {
     return this.currentState.player2CharacterID;
   }
 
-  get winnerID(): number | null {
+  get winnerID(): number {
     return this.currentState.winnerID;
   }
 
@@ -46,7 +46,7 @@ export class CombatsService {
       player2CharacterID: null,
       currentTurn: 0,
       activePlayerID: 0,
-      winnerID: null,
+      winnerID: 0,
     })
   }
 
@@ -59,7 +59,7 @@ export class CombatsService {
       player2CharacterID: null,
       currentTurn: 0,
       activePlayerID: 0,
-      winnerID: null,
+      winnerID: 0,
     })
   }
 
