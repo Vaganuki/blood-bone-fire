@@ -1,35 +1,106 @@
-.devSquare{
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  //font-size: 3rem;
-  font-family: "Arial Black";
+.combat-container {
+  display: grid;
+  height: 100vh;
+  padding: 1rem;
+  grid-template: fit-content(1rem) 90% 1fr/ 7fr 3fr;
+  grid-template-areas:
+    'turn turn'
+    'cC logs'
+    'fin fin';
+
+  .combat-logs {
+    grid-area: logs;
+  }
+
+  .combat-fight {
+    grid-area: cC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10vh;
+
+    .combat-chara-container {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
+      .combat-chara {
+        border-radius: 16px;
+        border: .2rem solid black;
+        width: 30%;
+        padding: 1rem;
+
+        .combat-chara-name {
+          text-transform: capitalize;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .atak {
+      display: grid;
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      gap: 1rem;
+
+      button {
+        background-color: transparent;
+        border-radius: 4px;
+
+        .skill-name {
+          font-size: 1.25rem;
+        }
+
+        div:not(.skill-name) {
+          color: #252525;
+        }
+      }
+    }
+  }
+
+  .combat-logs {
+    color: black;
+    padding: 0.5rem;
+    border: 1px solid black;
+    .log-title{
+      font-size: 1.25rem;
+      text-align: center;
+      border-bottom: 1px black dashed;
+      margin-bottom: 0.5rem;
+    }
+    .log-text {
+      overflow-y: scroll;
+      height: 90%;
+    }
+  }
 }
-.red{
-  background-color: lightcoral;
+
+
+h1 {
+  grid-area: turn;
+  margin: 0;
+  font-size: 4rem;
+  text-align: center;
 }
-.blue{
-  background-color: lightblue;
+
+.fin-combat {
+  grid-area: fin;
 }
-.activePlayer{
-  box-shadow: 0.2rem 0 2.5rem aqua;
+
+.activePlayer {
+  box-shadow: 0.2rem 0 2.5rem lightyellow;
 }
-.devCont{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+
+.devHp {
+  color: green;
 }
-.devCar{
-  width: fit-content;
+
+.devMp {
+  color: blue;
 }
-.devHp{
-  color:green;
-}
-.car{
+
+.car {
   display: flex;
   flex-direction: row;
   margin: 1rem;

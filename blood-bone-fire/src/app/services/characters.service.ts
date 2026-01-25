@@ -18,7 +18,7 @@ export class CharactersService {
       ...character,
       stats:{...character.stats},
       baseStats:{...character.baseStats},
-      statusEffects:null,
+      statusEffects:[],
     });
   }
 

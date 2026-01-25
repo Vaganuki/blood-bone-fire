@@ -1,3 +1,5 @@
+import {StatusEffect} from './status-effect.model';
+
 export type SkillType = 'physical' | 'magical' | 'special' | 'heal';
 export type ScalingStat = 'strength' | 'dexterity' | 'intelligence';
 
@@ -11,7 +13,7 @@ export interface Skill {
   scalingStat?: ScalingStat;
   scalingRatio?: number;
   isCommon?: boolean;
-  statusEffects?: any; // TODO will add status later
+  statusEffects?: StatusEffect[];
   targetSelf?: boolean; // True for healing, buffs and stuff owo
 }
 
@@ -19,6 +21,6 @@ export interface SkillEffect {
   damage: number;
   mpUsed: number;
   canUse: boolean;
-  reason?: string; // TODO Will be null if the skill can be used obv
-  appliedEffects?: null; //TODO will add status later
+  reason?: string;
+  appliedEffects?: StatusEffect[];
 }

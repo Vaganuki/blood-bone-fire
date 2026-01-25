@@ -8,11 +8,8 @@ import {Router, RouterLink} from '@angular/router';
 import {CombatsService} from '../../../services/combats.service';
 import {SkillsService} from '../../../services/skills.service';
 import {Skill, SkillEffect} from '../../../models/skills.model';
-
-interface CombatLog {
-  message: string;
-  type: 'damage' | 'heal' | 'status' | 'info' | 'error';
-}
+import {CombatLog} from '../../../models/combat-state.model';
+import {StatusEffectService} from '../../../services/status-effect.service';
 
 @Component({
   selector: 'app-combat-main',
@@ -26,6 +23,7 @@ export class CombatMainComponent {
 
   private destroy$ = new Subject<void>();
 
+  private _statusEffectService = inject(StatusEffectService);
   private _characterService = inject(CharactersService);
   private _skillsService = inject(SkillsService);
   private _combatService = inject(CombatsService);
@@ -59,9 +57,7 @@ export class CombatMainComponent {
         this.activePlayer = state.activePlayerID;
         this.currentTurn = state.currentTurn;
       });
-    console.log(this._combatService.combatState$);
     const charactersIDs = this._combatService.getCharacterIDs();
-    console.log('charactersIDs', charactersIDs);
     forkJoin([this._characterService.getCharacter(charactersIDs[0]), this._characterService.getCharacter(charactersIDs[1])])
       .subscribe(([selected1, selected2]) => {
         this.character1 = selected1;
@@ -73,8 +69,6 @@ export class CombatMainComponent {
         this._combatService.incrementTurn();
         this.getRandomTurnSkills();
       });
-
-    console.log(this.character1);
   }
 
   ngAfterViewInit() {
@@ -115,15 +109,16 @@ export class CombatMainComponent {
       });
     }
 
-    // if (this.lastSkillEffect.appliedEffects && this.lastSkillEffect.appliedEffects.length > 0) {
-    //   this.lastSkillEffect.appliedEffects.forEach((appliedEffect) => {
-    //     const effectTarget = randomSkill.targetSelf? this.character2 : this.character1;
-    //     this.addLog({
-    //       message: `${effectTarget.name} est affecté par ${effect.name} !`,
-    //       type: 'status'
-    //     });
-    //   });
-    // }
+    if (this.lastSkillEffect.appliedEffects && this.lastSkillEffect.appliedEffects.length > 0) {
+      this.lastSkillEffect.appliedEffects.forEach(effect => {
+        const effectTarget = skill.targetSelf ? attacker : target;
+        this.addLog({
+          message: `${effectTarget.name} est affecté par ${effect.name} !`,
+          type: 'status'
+        });
+      });
+    }
+
     if (target.stats.hp <= 0) {
       this.endCombat(attacker);
       return;
@@ -176,7 +171,10 @@ export class CombatMainComponent {
 
     const currentCharacter = this.activePlayer === 0 ? this.character1 : this.character2
 
-    //TODO treat status
+    const statusResult = this._statusEffectService.processStatusEffects(currentCharacter);
+    statusResult.forEach(status => {
+      this.addLog(status);
+    })
 
     if (currentCharacter.stats.hp <= 0) {
       const winner = this.activePlayer === 0 ? this.character1 : this.character2;
@@ -184,7 +182,10 @@ export class CombatMainComponent {
       return;
     }
 
-    //TODO expire effects
+    const expiredEffect = this._statusEffectService.decrementStatusEffects(currentCharacter);
+    expiredEffect.forEach(status => {
+      this.addLog(status);
+    });
 
     const mpRegen = this._skillsService.regenerateMP(currentCharacter);
     if (mpRegen > 0) {
@@ -232,7 +233,16 @@ export class CombatMainComponent {
       });
     }
 
-    //TODO status effect
+    if (this.lastSkillEffect.appliedEffects && this.lastSkillEffect.appliedEffects.length > 0) {
+      this.lastSkillEffect.appliedEffects.forEach(effect => {
+        const effectTarget = randomSkill.targetSelf ? this.character2 : this.character1;
+        this.addLog({
+          message: `${effectTarget.name} est affecté par ${effect.name} !`,
+          type: 'status'
+        });
+      });
+    }
+
 
     if (this.character1.stats.hp <= 0) {
       this.endCombat(this.character2);

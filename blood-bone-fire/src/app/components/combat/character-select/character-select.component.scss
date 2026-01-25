@@ -1,3 +1,15 @@
+ul {
+  list-style: none;
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  li {
+    padding: 0.5rem;
+    //margin: 0.2rem 0;
+  }
+}
+
 .selected {
   opacity: 0.6;
   border: 2px solid green;
@@ -27,6 +39,7 @@
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
   }
 }
+
 .player2 {
   position: relative;
   color: #5577ff;

@@ -1,3 +1,5 @@
+import {ActiveStatusEffect} from './status-effect.model';
+
 export interface CharacterStats{
   hp: number;
   maxHp: number;
@@ -13,6 +15,6 @@ export interface Character {
   name: string;
   stats:CharacterStats;
   baseStats: CharacterStats;
-  statusEffects: [] | null; //TODO Will add status later on
+  statusEffects: ActiveStatusEffect[];
   mpRegenPerTurn: number;
 }

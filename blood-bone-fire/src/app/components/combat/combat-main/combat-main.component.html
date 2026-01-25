@@ -1,34 +1,39 @@
-<button [routerLink]="'/'">BACK HOME</button>
-<h1>TOUR {{currentTurn}}</h1>
-<div class="devCont">
-  <div class="car">
-    <div class="devCar">
-      <div class="devSquare red" #player>{{ character1.name }}</div>
-      <div class="devHp">HP:{{ character1.stats.hp }}</div>
-      <div>MP: {{character1.stats.mp}}</div>
-    </div>
-    <div class="devCar">
-      <div class="devSquare blue" #player>{{ character2.name }}</div>
-      <div class="devHp">HP:{{ character2.stats.hp }}</div>
-      <div>MP: {{character2.stats.mp}}</div>
-    </div>
-  </div>
-  <div class="atak">
+<div class="combat-container">
+  <h1>TOUR {{ currentTurn }}</h1>
+  <div class="combat-fight">
 
-    <ul>
-      <li *ngFor="let skill of displayedSkills">
-        <button (click)="useSkill(skill)">
-            <div>{{ skill.name }}</div>
+    <div class="combat-chara-container">
+
+      <div class="combat-chara"#player>
+        <div class="combat-chara-name">{{ character1.name }}</div>
+        <div class="devHp">HP:{{ character1.stats.hp }}</div>
+        <div class="devMp">MP: {{ character1.stats.mp }}</div>
+      </div>
+
+      <div class="combat-chara" #player>
+        <div class="combat-chara-name">{{ character2.name }}</div>
+        <div class="devHp">HP:{{ character2.stats.hp }}</div>
+        <div class="devMp">MP: {{ character2.stats.mp }}</div>
+      </div>
+    </div>
+
+    <div class="atak">
+      @for (skill of displayedSkills; track skill.id) {
+          <button (click)="useSkill(skill)">
+            <div class="skill-name">{{ skill.name }}</div>
             <div>{{ skill.description }}</div>
-            <div>COUT :{{ skill.mpCost}}</div>
-        </button>
-
-      </li>
-    </ul>
+            <div>COUT :{{ skill.mpCost }} MP</div>
+          </button>
+      }
+    </div>
   </div>
-  <div>
+  <div class="combat-logs">
+    <div class="log-title">COMBAT LOGS</div>
+    <div class="log-text">
     @for (log of combatLog; track log.message) {
-      <p>{{log.message}}</p>
+      <p>{{ log.message }}</p>
     }
+    </div>
   </div>
+  <button class="fin-combat" [routerLink]="'/'">Abandonner le combat</button>
 </div>

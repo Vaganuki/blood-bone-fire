@@ -1,8 +1,12 @@
-<p>dev-tests works!</p>
+<p>Alpha 1.0.0</p>
 <h1>BLOOD BONE FIRE</h1>
 <h2>{{ 'SUBTITLE' | translate }}</h2>
-<button (click)="soloGame()" [routerLink]="'character-select'">{{ 'playButtonVSIA' | translate }}</button>
-<button (click)="versusGame()" [routerLink]="'character-select'">{{ 'playButtonVSPLAYER' | translate }}</button>
-<button [routerLink]="'character-list'">{{ 'charactersButton'|translate }}</button>
+<div class="menu">
+  <button (click)="versusGame()" [routerLink]="'character-select'">{{ 'playButtonVSPLAYER' | translate }}</button>
+  <button (click)="soloGame()" [routerLink]="'character-select'">{{ 'playButtonVSIA' | translate }}</button>
+  <button [routerLink]="'character-list'">{{ 'charactersButton'|translate }}</button>
+</div>
+<p>Démo pratique</p>
+<p>dev-tests works!</p>
 <!--<app-combat-main></app-combat-main>-->
 <!--<app-lang-selector></app-lang-selector>-->

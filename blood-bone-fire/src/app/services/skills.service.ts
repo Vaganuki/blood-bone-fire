@@ -1,14 +1,14 @@
 import {Skill, SkillEffect} from '../models/skills.model';
 import {Character} from '../models/characters.model';
-import {StatusEffectsService} from './status-effects.service';
 import {CHARACTER_SKILLS, COMMON_SKILLS} from '../datas/skills.data';
 import {inject, Injectable} from '@angular/core';
 import {randomInt} from 'toolzy';
+import {StatusEffectService} from './status-effect.service';
 
 @Injectable({providedIn: 'root'})
 export class SkillsService {
 
-  private _statusEffectService = inject(StatusEffectsService);
+  private _statusEffectService = inject(StatusEffectService);
 
   getCharacterSkills(characterId: number): Skill[] {
     const specificSkills = CHARACTER_SKILLS[characterId] || [];
@@ -59,7 +59,15 @@ export class SkillsService {
       };
     }
 
-    //TODO check if silenced effect later
+    //Check for silence
+    if (skill.type === 'magical' && !this._statusEffectService.canUseMagic(attacker)) {
+      return {
+        damage: 0,
+        mpUsed: 0,
+        canUse: false,
+        reason: 'Réduit au silence !',
+      };
+    }
 
     //checking MPs
     const canUse = attacker.stats.mp >= skill.mpCost;
@@ -69,8 +77,8 @@ export class SkillsService {
       damage: Math.abs(damage),
       mpUsed: skill.mpCost,
       canUse,
-      reason: canUse ? undefined : 'Not enough MP',
-      appliedEffects: null, //will add status later
+      reason: canUse ? undefined : 'Pas assez de MP',
+      appliedEffects: skill.statusEffects,
     }
   }
 
@@ -82,9 +90,7 @@ export class SkillsService {
     }
 
     attacker.stats.mp -= skill.mpCost; // deduction of MPs
-
     const actualTarget = skill.targetSelf ? attacker : target; //Checking for buffs/heals
-
     if (skill.type === 'heal') {
       //Apply healing but no hover healing
       actualTarget.stats.hp = Math.min(
@@ -95,7 +101,11 @@ export class SkillsService {
       actualTarget.stats.hp -= effect.damage;
     }
 
-    //TODO add status effects here later
+    if (skill.statusEffects && skill.statusEffects.length > 0) {
+      skill.statusEffects.forEach(effect => {
+        this._statusEffectService.applyStatusEffects(actualTarget, effect, currentTurn);
+      });
+    }
 
     return effect;
   }

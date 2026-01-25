@@ -4,7 +4,7 @@
     <p class="selection-message">{{getSelectionMessage()}}</p>
   </div>
 <div class="character-list">
-  <h2>Character List</h2>
+  <h2>Liste des héros</h2>
   <ul>
     <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
         [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">

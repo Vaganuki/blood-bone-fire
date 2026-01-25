@@ -68,7 +68,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'dexterity',
       scalingRatio: 1.3,
       statusEffects: [
-        //TODO add weaken
+        {
+          type: 'weaken',
+          name: 'Affaibli',
+          description: 'Force réduite',
+          duration: 2,
+          potency: 5,
+        }
       ]
     },
     {
@@ -81,7 +87,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 1.4,
       statusEffects: [
-        //TODO Add stun
+        {
+          type: 'stun',
+          name: 'Étourdi',
+          description: 'Ne peut pas agir',
+          duration: 1,
+          potency: 0,
+        }
       ]
     },
     {
@@ -94,7 +106,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 0.8,
       statusEffects: [
-        //TODO Add regen
+        {
+          type: 'regen',
+          name: 'Régénération',
+          description: 'Récupère des HP chaque tour',
+          duration: 3,
+          potency: 10,
+        }
       ]
     },
     {
@@ -107,7 +125,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'strength',
       scalingRatio: 3,
       statusEffects: [
-        //TODO Add dext boost
+        {
+          type: 'boost_dex',
+          name: 'Célérité',
+          description: 'Augmente la dexérité',
+          duration: 5,
+          potency: 10,
+        }
       ]
     },
     {
@@ -120,7 +144,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 1.0,
       statusEffects: [
-        //TODO Add silence
+        {
+          type: 'silence',
+          name: 'Silence',
+          description: 'Ne peut pas utiliser de magie',
+          duration: 2,
+          potency: 0,
+        }
       ]
     },
   ],
@@ -132,11 +162,15 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       baseDamage: 0,
       mpCost: 18,
       type: 'special',
-      scalingStat: 'intelligence',
-      scalingRatio: 1.4,
       targetSelf: true,
       statusEffects: [
-        //TODO dex boost here
+        {
+          type: 'boost_dex',
+          name: 'Célérité',
+          description: 'Augmente la dexérité',
+          duration: 3,
+          potency: 15,
+        }
       ]
     },
     {
@@ -150,7 +184,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingRatio: 1,
       targetSelf: true,
       statusEffects: [
-        //TODO stun for a turn
+        {
+          type: 'stun',
+          name: 'Étourdi',
+          description: 'Ne peut pas agir',
+          duration: 3,
+          potency: 0,
+        }
       ]
     },
     {
@@ -163,8 +203,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'dexterity',
       scalingRatio: 1,
       statusEffects: [
-        //TODO Add poison
-      ]
+        {
+          type: 'poison',
+          name: 'Empoisonné',
+          description: 'Perd des HP% tous les tours',
+          duration: 3,
+          potency: 0.05,
+        }]
     },
     {
       id: 'lhel_skill_4',
@@ -176,7 +221,13 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingStat: 'intelligence',
       scalingRatio: 1,
       statusEffects: [
-        //TODO Add burn
+        {
+          type: 'burn',
+          name: 'Brulure',
+          description: 'Perd des HP tous les tours',
+          duration: 3,
+          potency: 10,
+        }
       ]
     },
     {
@@ -186,23 +237,32 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       baseDamage: 0,
       mpCost: 10,
       type: 'special',
-      scalingStat: 'dexterity',
-      scalingRatio: 1,
       statusEffects: [
-        //TODO Add weaken
+        {
+          type: 'weaken',
+          name: 'Affaibli',
+          description: 'Force réduite',
+          duration: 4,
+          potency: 3,
+        }
       ]
     },
     {
       id: 'lhel_skill_6',
       name: 'Furie vindicative',
       description: 'Débloque votre colère',
-      baseDamage: 0,
+      baseDamage: -0,
       mpCost: 10,
       type: 'special',
-      scalingStat: 'dexterity',
-      scalingRatio: 1.0,
+      targetSelf:true,
       statusEffects: [
-        //TODO Add atk boost
+        {
+          type: 'boost_str',
+          name: 'Fureur',
+          description: 'Force augmentée',
+          duration: 6,
+          potency: 5,
+        }
       ]
     },
   ]

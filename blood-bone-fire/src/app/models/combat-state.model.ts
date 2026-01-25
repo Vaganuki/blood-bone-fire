@@ -10,6 +10,11 @@ export interface CombatState {
   winnerID: number | null;
 }
 
+export interface CombatLog {
+  message: string;
+  type: 'damage' | 'heal' | 'status' | 'info' | 'error';
+}
+
 export const INITIAL_COMBAT_STATE: CombatState = {
   gameMode:null,
   player1CharacterID: null,
@@ -19,3 +24,4 @@ export const INITIAL_COMBAT_STATE: CombatState = {
   activePlayerID: 0,
   winnerID: null,
 };
+
