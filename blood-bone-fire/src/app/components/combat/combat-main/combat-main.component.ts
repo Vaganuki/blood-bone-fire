@@ -74,7 +74,7 @@ export class CombatMainComponent {
   ngAfterViewInit() {
     this.players = this._playerList.toArray()
     if (this.players.length > 0) {
-      this.players[0].nativeElement.classList.add('activePlayer');
+      this.players[0].nativeElement.classList.toggle('activePlayer');
     }
   }
 

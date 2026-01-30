@@ -1,11 +1,25 @@
-h1{
+h1 {
   color: crimson;
   font-size: 7rem;
   margin: 1.25rem 0 0;
 }
-.menu{
+
+.menu {
   display: flex;
   flex-direction: column;
   width: 20vw;
   gap: 1rem;
+}
+
+.dev-container {
+
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .dev-title {
+    height: 40vh;
+  }
 }
