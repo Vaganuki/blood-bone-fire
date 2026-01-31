@@ -60,6 +60,8 @@
           },
           "configurations": {
             "production": {
+                "baseHref": "/blood-bone-fire/",
+                "deployUrl": "/blood-bone-fire/",
               "budgets": [
                 {
                   "type": "initial",
