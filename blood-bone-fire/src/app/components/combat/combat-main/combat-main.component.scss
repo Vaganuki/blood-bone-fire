@@ -56,7 +56,7 @@
       gap: 1rem;
 
       button {
-        background-color: transparent;
+        //background-color: transparent;
         border-radius: 4px;
 
         .skill-name {
@@ -115,12 +115,12 @@ h1 {
   }
   &.player-1 {
     &:before {
-      background-image: url("/placeholders/active_player_1.webp");
+      background-image: url("/assets/placeholders/active_player_1.webp");
     }
   }
   &.player-2 {
     &:before {
-      background-image: url("/placeholders/active_player_2.webp");
+      background-image: url("/assets/placeholders/active_player_2.webp");
     }
   }
 }
