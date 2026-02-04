@@ -252,6 +252,14 @@ export class CombatMainComponent {
     this.switchPlayer();
   }
 
+  getHpBarColor(currentHp: number, maxHp: number): string {
+    const percentage = (currentHp / maxHp) * 100;
+    if(percentage >= 75) return 'green';
+    if(percentage >= 50) return 'orange';
+    if(percentage >= 25) return 'red';
+    return 'crimson';
+  }
+
   private endCombat(winner: Character) {
     this.addLog({
       message: `${winner.name} remporte le combat!`,

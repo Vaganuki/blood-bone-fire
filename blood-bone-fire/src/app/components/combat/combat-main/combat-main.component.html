@@ -1,71 +1,125 @@
+<h1>TOUR {{ currentTurn }}</h1>
 <div class="combat-container">
-  <h1>TOUR {{ currentTurn }}</h1>
-  <div class="combat-fight">
-
-    <div class="combat-chara-container">
 
 
+  <div class="combat-character-container">
 
-      <div class="combat-chara player-1"#player>
+    <div class="combat-character player-1">
 
-        <div class="combat-chara-sprite"><img src="assets/placeholders/player_placeholder.webp" alt="character sprite"></div>
+      <div class="character-sprite" #player>
+        <img src="assets/placeholders/player_placeholder.webp" alt="character sprite">
+      </div>
 
-        <div class="combat-chara-name">{{ character1.name }}</div>
-        <div class="devHp">HP:{{ character1.stats.hp }}</div>
-        <div class="devMp">MP: {{ character1.stats.mp }}</div>
-        <ul>
-          <li>STR : {{character1.stats.strength}}</li>
-          <li>DEX : {{character1.stats.dexterity}}</li>
-          <li>INT : {{character1.stats.intelligence}}</li>
-        </ul>
+      <div class="character-stat-card">
+        <div class="character-name">{{ character1.name }}</div>
+
+        <div class="character-main-stats">
+
+          <div class="hp-mp-container">
+
+            <div class="hp-bar-container">
+              <div class="hp-label">HP:{{ character1.stats.hp }}</div>
+              <div class="hp-bar"
+                   [style.width.%]="(character1.stats.hp / character1.stats.maxHp) * 100"
+                   [style.background-color]="getHpBarColor(character1.stats.hp, character1.stats.maxHp)"
+              ></div>
+            </div>
+
+            <div class="mp-bar-container">
+              <div class="mp-label">MP: {{ character1.stats.mp }}</div>
+              <div class="mp-bar"
+                   [style.width.%]="(character1.stats.mp / character1.stats.maxMp) * 100"
+              ></div>
+            </div>
+          </div>
+
+          <ul class="character-stats">
+            <li>STR : {{ character1.stats.strength }}</li>
+            <li>DEX : {{ character1.stats.dexterity }}</li>
+            <li>INT : {{ character1.stats.intelligence }}</li>
+          </ul>
+        </div>
         @if (character1.statusEffects) {
           <ul>
             @for (eff of character1.statusEffects; track eff.name) {
-              <li>{{eff.name}} ({{eff.duration}})</li>
+              <li>{{ eff.name }} ({{ eff.duration }})</li>
             }
           </ul>
         }
       </div>
+    </div>
 
-      <div class="combat-chara player-2" #player>
-        <div class="combat-chara-sprite"><img style="transform: scaleX(-1)" src="assets/placeholders/player_placeholder.webp" alt="character sprite"></div>
-        <div class="combat-chara-name">{{ character2.name }}</div>
-        <div class="devHp">HP:{{ character2.stats.hp }}</div>
-        <div class="devMp">MP: {{ character2.stats.mp }}</div>
-        <div class="combat-chara-stat">
-          <ul>
-            <li>STR : {{character2.stats.strength}}</li>
-            <li>DEX : {{character2.stats.dexterity}}</li>
-            <li>INT : {{character2.stats.intelligence}}</li>
+    <div class="combat-character player-2">
+
+      <div class="character-sprite" #player>
+        <img style="transform: scaleX(-1)" src="assets/placeholders/player_placeholder.webp" alt="character sprite">
+      </div>
+
+      <div class="character-stat-card">
+        <div class="character-name">{{ character2.name }}</div>
+
+        <div class="character-main-stats">
+
+          <div class="hp-mp-container">
+
+            <div class="hp-bar-container">
+              <div class="hp-label">HP:{{ character2.stats.hp }}</div>
+              <div class="hp-bar"
+                   [style.width.%]="(character2.stats.hp / character2.stats.maxHp) * 100"
+                   [style.background-color]="getHpBarColor(character2.stats.hp, character2.stats.maxHp)"
+              ></div>
+            </div>
+
+            <div class="mp-bar-container">
+              <div class="mp-label">MP: {{ character2.stats.mp }}</div>
+              <div class="mp-bar"
+                   [style.width.%]="(character2.stats.mp / character2.stats.maxMp) * 100"
+              ></div>
+            </div>
+          </div>
+
+          <ul class="character-stats">
+            <li>STR : {{ character2.stats.strength }}</li>
+            <li>DEX : {{ character2.stats.dexterity }}</li>
+            <li>INT : {{ character2.stats.intelligence }}</li>
           </ul>
-          @if (character2.statusEffects) {
-            <ul>
-              @for (eff of character2.statusEffects; track eff.name) {
-                <li>{{eff.name}} ({{eff.duration}})</li>
-              }
-            </ul>
-          }
         </div>
+        @if (character2.statusEffects) {
+          <ul>
+            @for (eff of character2.statusEffects; track eff.name) {
+              <li>{{ eff.name }} ({{ eff.duration }})</li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </div>
+
+
+  <div class="combat-menu">
+
+    <div class="combat-menu-attack">
+      @for (skill of displayedSkills; track skill.id) {
+        <button (click)="useSkill(skill)">
+          <div class="skill-name">{{ skill.name }}</div>
+          <div>{{ skill.description }}</div>
+          <div>COUT :{{ skill.mpCost }} MP</div>
+        </button>
+      }
+    </div>
+
+    <button class="combat-exit-button" [routerLink]="'/'">Abandonner le combat</button>
+
+    <div class="combat-logs">
+      <div class="log-title">COMBAT LOGS</div>
+      <div class="log-text">
+        @for (log of combatLog; track log.message) {
+          <p>{{ log.message }}</p>
+        }
       </div>
     </div>
 
-    <div class="atak">
-      @for (skill of displayedSkills; track skill.id) {
-          <button (click)="useSkill(skill)">
-            <div class="skill-name">{{ skill.name }}</div>
-            <div>{{ skill.description }}</div>
-            <div>COUT :{{ skill.mpCost }} MP</div>
-          </button>
-      }
-    </div>
   </div>
-  <div class="combat-logs">
-    <div class="log-title">COMBAT LOGS</div>
-    <div class="log-text">
-    @for (log of combatLog; track log.message) {
-      <p>{{ log.message }}</p>
-    }
-    </div>
-  </div>
-  <button class="fin-combat" [routerLink]="'/'">Abandonner le combat</button>
+
 </div>
+<img class="combat-background" src="assets/placeholders/dev-background.webp" alt="Arena image">

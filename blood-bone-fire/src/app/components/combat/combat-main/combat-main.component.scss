@@ -2,140 +2,203 @@
   display: grid;
   height: 100vh;
   padding: 1rem;
-  grid-template: fit-content(1rem) 90% 1fr/ 7fr 3fr;
-  grid-template-areas:
-    'turn turn'
-    'cC logs'
-    'fin fin';
+  grid-template-rows: 80% 20%;
 
-  .combat-logs {
-    grid-area: logs;
-  }
+  .combat-character-container {
+    width: 100%;
 
-  .combat-fight {
-    grid-area: cC;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10vh;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-bottom: 20vh;
 
-    .combat-chara-container {
+    .combat-character {
+      width: 20vw;
+
       display: flex;
-      justify-content: space-around;
-      width: 100%;
+      //justify-content: center;
+      align-items: flex-end;
 
-      align-items: center;
+      gap: 1vw;
 
-      .combat-chara {
-        width: 30%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        .combat-chara-sprite {
-          width: 10vw;
-
-          img {
-            width: 100%;
-            image-rendering: pixelated;
-          }
+      .character-sprite {
+        img {
+          width: 100%;
         }
+        width: 7.5vw;
+      }
 
-        .combat-chara-name {
+      .character-stat-card {
+        border: 4px double black;
+        padding: 0.5rem;
+
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+
+        .character-name {
           text-transform: capitalize;
           font-size: 1.5rem;
           font-weight: bold;
+          text-align: center;
+        }
+
+        .character-main-stats {
+
+
+          .hp-mp-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            .hp-bar-container, .mp-bar-container {
+              position: relative;
+
+              width: 100%;
+              height: 1.5rem;
+              background-color: #222;
+              border: 2px solid black;
+              border-radius: 0.25rem;
+              overflow: hidden;
+
+              text-align: center;
+
+              .hp-label, .mp-label {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 2;
+                font-size: 0.9rem;
+                color: white;
+                text-shadow: 1px 1px 2px black;
+              }
+
+              .hp-bar {
+                position: absolute;
+                top: 0;
+                z-index: 1;
+                height: 100%;
+                background-color: green;
+              }
+
+              .mp-bar {
+                position: absolute;
+                top: 0;
+                z-index: 1;
+                height: 100%;
+                background-color: darkblue;
+              }
+            }
+          }
+
+          .character-stats {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+
+            li {
+              padding-top: 0.25rem;
+            }
+          }
         }
       }
+
+
     }
 
-    .atak {
-      display: grid;
-      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-      gap: 1rem;
-
-      button {
-        //background-color: transparent;
-        border-radius: 4px;
-
-        .skill-name {
-          font-size: 1.25rem;
-        }
-
-        div:not(.skill-name) {
-          color: #252525;
-        }
-      }
+    .player-1 {
+      flex-flow: row-reverse;
     }
+
   }
 
-  .combat-logs {
-    color: black;
-    padding: 0.5rem;
-    border: 1px solid black;
+  .combat-menu {
 
-    .log-title {
-      font-size: 1.25rem;
-      text-align: center;
-      border-bottom: 1px black dashed;
-      margin-bottom: 0.5rem;
+    display: grid;
+    grid-template: 80% 20% / 20% 80%;
+    grid-template-areas:
+  'attackButtons combatLogs'
+  'exitButton combatLogs';
+
+    .combat-menu-attack {
+      display: grid;
+      grid-template: 1fr 1fr/ 1fr 1fr;
     }
 
-    .log-text {
-      overflow-y: scroll;
-      height: 90%;
+    .combat-logs {
+      color: black;
+      padding: 0.5rem;
+      border: 1px solid black;
+
+      .log-title {
+        font-size: 1.25rem;
+        text-align: center;
+        border-bottom: 1px black dashed;
+        margin-bottom: 0.5rem;
+      }
+
+      .log-text {
+        overflow-y: scroll;
+        height: 80%;
+      }
     }
   }
 }
 
 
+.activePlayer {
+  &:before {
+    content: "";
+    display: block;
+    height: 1.5vw;
+
+    margin: 0.5rem auto;
+
+    aspect-ratio: 29/16;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+.player-1 {
+  .activePlayer:before{
+    background-image: url("/assets/placeholders/active_player_1.webp");
+  }
+}
+
+.player-2 {
+  .activePlayer:before{
+        background-image: url("/assets/placeholders/active_player_2.webp");
+  }
+}
+
 h1 {
-  grid-area: turn;
-  margin: 0;
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 4rem;
   text-align: center;
 }
 
-.fin-combat {
-  grid-area: fin;
+.combat-background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: -100;
 }
 
-.activePlayer {
-  &.player-1, &.player-2 {
-    &:before {
-      content: "";
-      display: block;
-      height: 1.5vw;
-      aspect-ratio: 29/16;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
-  }
-  &.player-1 {
-    &:before {
-      background-image: url("/assets/placeholders/active_player_1.webp");
-    }
-  }
-  &.player-2 {
-    &:before {
-      background-image: url("/assets/placeholders/active_player_2.webp");
-    }
-  }
+//For grid purpose
+.combat-menu-attack {
+  grid-area: attackButtons;
 }
 
-
-.devHp {
-  color: green;
+.combat-exit-button {
+  grid-area: exitButton;
 }
 
-.devMp {
-  color: blue;
-}
-
-.car {
-  display: flex;
-  flex-direction: row;
-  margin: 1rem;
+.combat-logs {
+  grid-area: combatLogs;
 }

@@ -1,13 +1,13 @@
-<p>Alpha 1.1.1</p>
+<p>Alpha 1.1.3</p>
 <h1 style="display: none;">BLOOD BONE FIRE</h1>
-<div class="dev-container">
+<div class="dev-container unselectable">
 
-  <img class="dev-title" src="assets/placeholders/Test1.webp" alt="titre">
+  <img class="dev-title" src="assets/title_screen_logo.png" alt="titre">
   <h2>{{ 'SUBTITLE' | translate }}</h2>
   <div class="menu">
-    <button (click)="versusGame()" [routerLink]="'character-select'">{{ 'playButtonVSPLAYER' | translate }}</button>
-    <button (click)="soloGame()" [routerLink]="'character-select'">{{ 'playButtonVSIA' | translate }}</button>
-    <button [routerLink]="'character-list'">{{ 'charactersButton'|translate }}</button>
+    <button class="menu-button" (click)="versusGame()" [routerLink]="'character-select'">{{ 'playButtonVSPLAYER' | translate }}</button>
+    <button class="menu-button" (click)="soloGame()" [routerLink]="'character-select'">{{ 'playButtonVSIA' | translate }}</button>
+    <button class="menu-button" [routerLink]="'character-list'">{{ 'charactersButton'|translate }}</button>
   </div>
   <p>Démo pratique</p>
   <p>dev-tests works!</p>
