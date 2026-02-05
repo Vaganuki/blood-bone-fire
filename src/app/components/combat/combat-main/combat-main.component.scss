@@ -1,3 +1,5 @@
+@use "../../../../styles.scss" as *;
+
 .combat-container {
   display: grid;
   height: 100vh;
@@ -29,7 +31,7 @@
       }
 
       .character-stat-card {
-        border: 4px double black;
+        border: 4px double $dark-red;
         padding: 0.5rem;
 
         width: 100%;

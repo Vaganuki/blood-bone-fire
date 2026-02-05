@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Pixelify+Sans:wght@400..700&display=swap');
 
+// Colors based on the Windows 95 - 256 colours palette you can find in the read me associated with this project
+$dark-red: #800000;
+$red-highlight: #d40000;
+$red: #ff0000;
+
+$dark-blue:  #000080;
+$blue-highlight: #2a00ff;
+$blue: #0000ff;
+
 * {
   font-family: 'Pixelify Sans', sans-serif;
   margin: 0;
@@ -20,7 +29,7 @@ h1 {
 
   color: white;
 
-  border: double coral 4px;
+  border: double $dark-red 4px;
 
   &:after {
     content: '';
@@ -30,7 +39,6 @@ h1 {
     display: block;
     width: 100%;
     height: 100%;
-    //background-image: url("/assets/button_background.png");
     background-image: url("/assets/placeholders/UntitledArtwork1.png");
     background-repeat: no-repeat;
     background-position: center center;
@@ -39,7 +47,7 @@ h1 {
 
   &:hover {
     transition: 0.25s;
-    background-color: rgba(255, 100, 100, 0.2);
+    background-color: rgba($red, 0.2);
     &:before {
       content: "> ";
     }

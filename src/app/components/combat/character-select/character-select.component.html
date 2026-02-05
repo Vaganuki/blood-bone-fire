@@ -1,15 +1,24 @@
-<button [routerLink]="'/'">BACK HOME</button>
-  <div class="header">
+<div class="character-select-container">
+
+  <div class="selection-header">
     <h1>Sélection des personnages</h1>
-    <p class="selection-message">{{getSelectionMessage()}}</p>
+    <p class="selection-message">{{ getSelectionMessage() }}</p>
   </div>
-<div class="character-list">
-  <h2>Liste des héros</h2>
-  <ul>
-    <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
-        [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">
-      {{ c.name }}
-    </li>
-  </ul>
+
+  <div class="select-list-container">
+    <ul>
+      <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
+          [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">
+        {{ c.name }}
+      </li>
+    </ul>
+    <p>MORE CHARACTERS TO COME, STAY TUNED</p>
+  </div>
+
+  <div class="selection-menu">
+    <button class="menu-button" [routerLink]="'/'">BACK HOME</button>
+    <button class="menu-button" [disabled]="!canConfirm()" (click)="confirmSelection()">CONFIRM</button>
+  </div>
+
 </div>
-<button [disabled]="!canConfirm()" (click)="confirmSelection()">CONFIRM</button>
+
