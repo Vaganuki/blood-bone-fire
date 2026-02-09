@@ -14,7 +14,7 @@ import {RouterLink} from '@angular/router';
 export class CharacterListComponent {
 
   characters: {id: number, name: string}[] = [];
-  selectedCharacter?: Character;
+  selectedCharacter: Character | null = null;
 
   constructor(private _characterService: CharactersService) {}
 
@@ -28,6 +28,10 @@ export class CharacterListComponent {
     this._characterService.getCharacter(id).subscribe(character => {
       this.selectedCharacter = character;
     });
+  }
+
+  clearSelectedCharacter() {
+    this.selectedCharacter = null;
   }
 }
 

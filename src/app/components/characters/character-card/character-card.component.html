@@ -1,17 +1,65 @@
 <div class="character-card">
-  <h2>{{ character.name }}</h2>
-  <h3>Stats</h3>
-  <ul>
-    <li>HP: {{ character.stats.hp }}</li>
-    <li>MP: {{ character.stats.mp }}</li>
-    <li>Strength: {{ character.stats.strength }}</li>
-    <li>Dexterity: {{ character.stats.dexterity }}</li>
-    <li>Intelligence: {{ character.stats.intelligence }}</li>
-  </ul>
+  <div class="card-header">
+    <img class="card-picture" src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+    <h2>{{ character.name }}</h2>
+  </div>
 
-<!--  <h3>Skills</h3>-->
-<!--  <ul>-->
-<!--    <li *ngFor="let skill of character.skills">{{ skill }}</li>-->
-<!--  </ul>-->
+  <div class="card-stats">
+    <h3>Stats</h3>
+    <div class="main-stats">
+      <div>HP: {{ character.stats.hp }}</div>
+      <div>MP: {{ character.stats.mp }}</div>
+    </div>
 
+    <div class="secondary-stats">
+      <div>Strength: {{ character.stats.strength }}</div>
+      <div>Dexterity: {{ character.stats.dexterity }}</div>
+      <div>Intelligence: {{ character.stats.intelligence }}</div>
+    </div>
+
+  </div>
+
+  <div class="card-skills">
+    <h3>Skills</h3>
+    <ul>
+      @for (skill of skills; track skill.id) {
+        <li (click)="selectSkill(skill)">{{ skill.name }}</li>
+      }
+    </ul>
+  </div>
+
+  @if (selectedSkill) {
+    <div class="card-skill-details">
+      <h4>{{ selectedSkill.name }}</h4>
+      <div class="skill-description">
+        <h5>Skill description:</h5>
+        <p>{{ selectedSkill.description }}</p>
+      </div>
+      <div class="mp-cost">
+        MP COST: {{ selectedSkill.mpCost }}
+      </div>
+      @if (selectedSkill.scalingStat) {
+        <div class="scaling-stat">SCALING STAT: {{ selectedSkill.scalingStat }}</div>
+      }
+      <div class="skill-type">TYPE : {{ selectedSkill.type }}</div>
+      @if (selectedSkill.statusEffects) {
+        <div class="skill-effects">
+          <h5>Status Effects:</h5>
+          <ul class="skill-effect-container">
+
+            @for (e of selectedSkill.statusEffects; track e.name) {
+              <li class="skill-effect">
+                <div class="effect-name">{{ e.name }}</div>
+                <div class="effect-duration">DURATION : {{ e.duration }}</div>
+                <div class="effect-description">
+                  <h6>Description:</h6>
+                  <p>{{ e.description }}</p>
+                </div>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  }
 </div>

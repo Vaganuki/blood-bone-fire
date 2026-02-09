@@ -1,14 +1,20 @@
-<button [routerLink]="'/'">Home</button>
-
-<div class="character-list">
-  <h2>Character List</h2>
+<div class="character-list-container">
+  <h1>Character List</h1>
   <ul>
-    <li *ngFor="let c of characters" (click)="selectCharacter(c.id)">
-      {{ c.name }}
-    </li>
+    @for (character of characters; track character.id) {
+      <li (click)="selectCharacter(character.id)">
+        {{ character.name }}
+        <img src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+      </li>
+    }
   </ul>
-</div>
-
-<div *ngIf="selectedCharacter">
-  <app-character-card [character]="selectedCharacter"></app-character-card>
+  @if (selectedCharacter) {
+    <div class="selected-character-container">
+      <div class="closing-selected" (click)="clearSelectedCharacter()">X</div>
+      <app-character-card [character]="selectedCharacter"/>
+    </div>
+  }
+  <div class="character-list-menu">
+    <button class="menu-button" [routerLink]="'/'">retour</button>
+  </div>
 </div>
