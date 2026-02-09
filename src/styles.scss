@@ -24,6 +24,8 @@ h1 {
 .menu-button {
   aspect-ratio: 4/1;
   background-color: transparent;
+  z-index: 1;
+
   position: relative;
   padding: 0;
 
