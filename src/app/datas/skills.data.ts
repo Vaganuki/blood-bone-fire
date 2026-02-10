@@ -284,6 +284,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       baseDamage: 0,
       mpCost: 20,
       type: 'special',
+      targetSelf:true,
       statusEffects:[
         {
           type:'boost_str',
@@ -363,6 +364,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       baseDamage:0,
       mpCost:20,
       type: 'magical',
+      targetSelf:true,
       statusEffects:[
         {
           type: 'boost_int',
@@ -370,6 +372,245 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
           description: 'Intelligence boostée',
           duration: 10,
           potency: 300,
+        },
+        {
+          type: 'silence',
+          name: 'Silence',
+          description: 'Ne peut pas utiliser la magie',
+          duration: 9,
+          potency: 0,
+        }
+      ]
+    }
+  ],
+  4: [
+    {
+      id:'criminou_skill_1',
+      name:'Griffes de pétales',
+      description: 'Des pétales tranchants virevoltent',
+      baseDamage: 20,
+      mpCost: 15,
+      type: 'magical',
+      scalingStat: 'dexterity',
+      scalingRatio: 1.3,
+    },
+    {
+      id:'criminou_skill_2',
+      name:'Pollen soporifique',
+      description:'Un nuage floral endort l\'ennemi',
+      baseDamage: 0,
+      mpCost: 20,
+      type: 'special',
+      statusEffects:[
+        {
+          type:'stun',
+          name:'Étourdi',
+          description:'Ne peut pas agir',
+          duration: 2,
+          potency: 0,
+        }
+      ]
+    },
+    {
+      id:'criminou_skill_3',
+      name:'Ronces de glace',
+      description:'Des lianes épineuses gèlent leur cible',
+      baseDamage: 10,
+      mpCost:18,
+      type: 'magical',
+      scalingStat: 'intelligence',
+      scalingRatio: 1.1,
+      statusEffects:[
+        {
+          type: 'freeze',
+          name: 'Gelé',
+          description: 'Dextérité Réduite',
+          duration: 3,
+          potency: 10,
+        }
+      ]
+    },
+    {
+      id:'criminou_skill_4',
+      name:'Photosynthèse',
+      description:'Se nourrit du soleil',
+      baseDamage:-35,
+      mpCost:22,
+      type: 'heal',
+      scalingStat: 'intelligence',
+      scalingRatio: 1.2,
+      targetSelf:true,
+      statusEffects:[
+        {
+          type: 'regen',
+          name: 'Régénération',
+          description: 'Récupère des HP tous les tours',
+          duration: 3,
+          potency: 12,
+        },
+      ]
+    },
+    {
+      id:'criminou_skill_5',
+      name:'Parfum toxique',
+      description:'Une odeur délicieusement mortelle',
+      baseDamage:0,
+      mpCost:15,
+      type: 'special',
+      statusEffects:[
+        {
+          type: 'poison',
+          name: 'Empoisonné',
+          description: 'Perd des HP% tous les tours',
+          duration: 4,
+          potency: 0.07,
+        }
+      ]
+    },
+    {
+      id:'criminou_skill_6',
+      name:'Avatar printanier',
+      description:'Criminou devient l\'Avatar du printemps',
+      baseDamage:0,
+      mpCost:30,
+      type: 'magical',
+      targetSelf:true,
+      statusEffects:[
+        {
+          type: 'boost_int',
+          name: 'Clairvoyance',
+          description: 'Intelligence boostée',
+          duration: 5,
+          potency: 20,
+        },
+        {
+          type: 'boost_dex',
+          name: 'Célérité',
+          description: 'Dextérité boostée',
+          duration: 5,
+          potency: 10,
+        }
+      ]
+    }
+  ],
+  5:[
+    {
+      id:'skyy_skill_1',
+      name:'Châtiment sacré',
+      description: 'La lumière frappe la cible',
+      baseDamage: 28,
+      mpCost: 30,
+      type: 'magical',
+      scalingStat: 'intelligence',
+      scalingRatio: 1.4,
+    },
+    {
+      id:'skyy_skill_2',
+      name:'Mot de l\'ombre: Tourment',
+      description:'Une souffrance persiste sur la cible',
+      baseDamage: 5,
+      mpCost: 18,
+      type: 'magical',
+      scalingStat: 'intelligence',
+      scalingRatio: 1,
+      statusEffects:[
+        {
+          type:'burn',
+          name:'Brûlure',
+          description:'Perd des HP tous les tours',
+          duration: 4,
+          potency: 15,
+        }
+      ]
+    },
+    {
+      id:'skyy_skill_3',
+      name:'Mot de l\'ombre: Faiblesse',
+      description:'Affaiblit la cible',
+      baseDamage: 0,
+      mpCost:15,
+      type: 'magical',
+      statusEffects:[
+        {
+          type: 'weaken',
+          name: 'Affaibli',
+          description: 'Force réduite',
+          duration: 4,
+          potency: 8,
+        },
+        {
+          type: 'slow',
+          name: 'Ralentit',
+          description: 'Dextérité réduite',
+          duration: 4,
+          potency: 8,
+        },
+        {
+          type: 'silence',
+          name: 'Silence',
+          description: 'Ne peut pas utiliser la magie',
+          duration: 2,
+          potency: 0,
+        }
+      ]
+    },
+    {
+      id:'skyy_skill_4',
+      name:'Mot de l\'ombre: Cauchemar',
+      description:'Montre les pires horeurs à votre adversaire',
+      baseDamage:1,
+      mpCost:20,
+      type: 'magical',
+      statusEffects:[
+        {
+          type: 'stun',
+          name: 'Étourdit',
+          description: 'Ne peut pas agir',
+          duration: 3,
+          potency: 0,
+        },
+      ]
+    },
+    {
+      id:'skyy_skill_5',
+      name:'Mot de pouvoir: Intelligence',
+      description:'La sagesse divine vous éclaire',
+      baseDamage:0,
+      mpCost:20,
+      type: 'magical',
+      targetSelf:true,
+      statusEffects:[
+        {
+          type: 'boost_int',
+          name: 'Sagesse',
+          description: 'Intelligence augmentée',
+          duration: 6,
+          potency: 20,
+        }
+      ]
+    },
+    {
+      id:'skyy_skill_6',
+      name:'Mot de pouvoir: Bouclier',
+      description:'La foi renforce le corps',
+      baseDamage:-20,
+      mpCost:18,
+      type: 'special',
+      targetSelf:true,
+      statusEffects:[
+        {
+          type: 'regen',
+          name: 'Régénération',
+          description: 'Récupère des HP tous les tours',
+          duration: 5,
+          potency: 20,
+        },
+        {
+          type: 'boost_dex',
+          name: 'Célérité',
+          description: 'Dextérité boostée',
+          duration: 2,
+          potency: 5,
         }
       ]
     }
