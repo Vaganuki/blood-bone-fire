@@ -557,7 +557,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
     {
       id:'skyy_skill_4',
       name:'Mot de l\'ombre: Cauchemar',
-      description:'Montre les pires horeurs à votre adversaire',
+      description:'Montre les pires horreurs à votre adversaire',
       baseDamage:1,
       mpCost:20,
       type: 'magical',

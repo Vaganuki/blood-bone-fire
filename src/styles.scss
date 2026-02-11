@@ -32,6 +32,8 @@ h1 {
   color: white;
 
   border: double $dark-red 4px;
+  box-shadow: 0 .25rem .5rem $dark-red;
+  cursor: pointer;
 
   &:after {
     content: '';
@@ -50,6 +52,9 @@ h1 {
   &:hover {
     transition: 0.25s;
     background-color: rgba($red, 0.2);
+
+    box-shadow: 0 .25rem .5rem $red-highlight;
+
     &:before {
       content: "> ";
     }

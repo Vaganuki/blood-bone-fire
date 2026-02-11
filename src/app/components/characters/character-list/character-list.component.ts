@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject, PLATFORM_ID} from '@angular/core';
 import {CharactersService} from '../../../services/characters.service';
 import {Character} from '../../../models/characters.model';
-import {CommonModule} from '@angular/common';
+import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {CharacterCardComponent} from '../character-card/character-card.component';
 import {RouterLink} from '@angular/router';
 
@@ -13,6 +13,8 @@ import {RouterLink} from '@angular/router';
 })
 export class CharacterListComponent {
 
+  private platformId = inject(PLATFORM_ID)
+
   characters: {id: number, name: string}[] = [];
   selectedCharacter: Character | null = null;
 
@@ -22,6 +24,15 @@ export class CharacterListComponent {
     this._characterService.getAllCharacters().subscribe(characters => {
       this.characters = characters;
     });
+    if(isPlatformBrowser(this.platformId)) {
+      window.addEventListener('keydown', this.keyboardClearSelectedCharacters)
+    }
+  }
+
+  ngOnDestroy() {
+    if(isPlatformBrowser(this.platformId)) {
+      window.removeEventListener('keydown', this.keyboardClearSelectedCharacters);
+    }
   }
 
   selectCharacter(id: number) {
@@ -32,6 +43,14 @@ export class CharacterListComponent {
 
   clearSelectedCharacter() {
     this.selectedCharacter = null;
+  }
+
+  keyboardClearSelectedCharacters = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') this.selectedCharacter = null;
+  }
+
+  closeContainer(event: MouseEvent) {
+    if(event.target === event.currentTarget) this.clearSelectedCharacter();
   }
 }
 
