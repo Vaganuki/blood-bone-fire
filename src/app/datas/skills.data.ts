@@ -1,5 +1,8 @@
 import {Skill} from '../models/skills.model';
 
+// ============================================
+//              - COMMON SKILLS -
+// ============================================
 export const COMMON_SKILLS: Skill[] = [
   {
     id: 'common_basic_attack',
@@ -14,9 +17,9 @@ export const COMMON_SKILLS: Skill[] = [
   },
   {
     id: 'common_huge_magic',
-    name: 'Zaltrook',
+    name: 'Grosse magie',
     description: 'Grosse attaque magique',
-    baseDamage: 15,
+    baseDamage: 30,
     mpCost: 30,
     type: 'magical',
     isCommon: true,
@@ -46,7 +49,13 @@ export const COMMON_SKILLS: Skill[] = [
     isCommon: true
   }
 ];
+
+// ============================================
+//            - CHARACTER SKILLS -
+// ============================================
+
 export const CHARACTER_SKILLS: Record<number, Skill[]> = {
+  // ========== DEV01 SKILLS ==========
   1: [
     {
       id: 'dev01_skill_1',
@@ -100,11 +109,12 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       id: 'dev01_skill_4',
       name: 'Git revert',
       description: 'Annule le dernier push',
-      baseDamage: -20,
+      baseDamage: -40,
       mpCost: 18,
       type: 'heal',
       scalingStat: 'intelligence',
-      scalingRatio: 0.8,
+      scalingRatio: 1.3,
+      targetSelf: true,
       statusEffects: [
         {
           type: 'regen',
@@ -119,17 +129,18 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       id: 'dev01_skill_5',
       name: 'Cafeine hit',
       description: 'MONSTER',
-      baseDamage: -65,
-      mpCost: 30,
+      baseDamage: -45,
+      mpCost: 25,
       type: 'heal',
       scalingStat: 'strength',
-      scalingRatio: 3,
+      scalingRatio: 1.5,
+      targetSelf: true,
       statusEffects: [
         {
           type: 'boost_dex',
           name: 'Célérité',
           description: 'Augmente la dexérité',
-          duration: 5,
+          duration: 4,
           potency: 10,
         }
       ]
@@ -139,7 +150,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       name: 'Compilation Error',
       description: 'Visit my GitHub but don\'t look at my code',
       baseDamage: 5,
-      mpCost: 5,
+      mpCost: 8,
       type: 'magical',
       scalingStat: 'intelligence',
       scalingRatio: 1.0,
@@ -154,6 +165,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       ]
     },
   ],
+  // ========== LHELFIC SKILLS ==========
   2: [
     {
       id: 'lhel_skill_1',
@@ -177,18 +189,18 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       id: 'lhel_skill_2',
       name: 'Retour à la renardière',
       description: 'Hiberne pour se soigner',
-      baseDamage: -40,
-      mpCost: 10,
+      baseDamage: -70,
+      mpCost: 8,
       type: 'heal',
       scalingStat: 'intelligence',
-      scalingRatio: 1,
+      scalingRatio: 1.5,
       targetSelf: true,
       statusEffects: [
         {
           type: 'stun',
           name: 'Étourdi',
           description: 'Ne peut pas agir',
-          duration: 3,
+          duration: 1,
           potency: 0,
         }
       ]
@@ -197,7 +209,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       id: 'lhel_skill_3',
       name: 'Morsure sauce poubelle',
       description: 'Empoisonne l\'opposant',
-      baseDamage: 5,
+      baseDamage: 8,
       mpCost: 15,
       type: 'special',
       scalingStat: 'dexterity',
@@ -207,7 +219,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
           type: 'poison',
           name: 'Empoisonné',
           description: 'Perd des HP% tous les tours',
-          duration: 3,
+          duration: 4,
           potency: 0.05,
         }]
     },
@@ -215,8 +227,8 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       id: 'lhel_skill_4',
       name: 'Fureur du renard',
       description: 'Brûle l\'opposant de passion',
-      baseDamage: 5,
-      mpCost: 10,
+      baseDamage: 8,
+      mpCost: 12,
       type: 'magical',
       scalingStat: 'intelligence',
       scalingRatio: 1,
@@ -226,7 +238,7 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
           name: 'Brulure',
           description: 'Perd des HP tous les tours',
           duration: 3,
-          potency: 10,
+          potency: 12,
         }
       ]
     },
@@ -234,16 +246,18 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       id: 'lhel_skill_5',
       name: 'Fourrure étincelante',
       description: 'Affaibli quiconque tombera sous votre charme',
-      baseDamage: 0,
-      mpCost: 10,
+      baseDamage: 5,
+      mpCost: 12,
       type: 'special',
+      scalingStat: 'intelligence',
+      scalingRatio: 0.5,
       statusEffects: [
         {
           type: 'weaken',
           name: 'Affaibli',
           description: 'Force réduite',
           duration: 4,
-          potency: 3,
+          potency: 5,
         }
       ]
     },
@@ -252,120 +266,117 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       name: 'Furie vindicative',
       description: 'Débloque votre colère',
       baseDamage: -0,
-      mpCost: 10,
+      mpCost: 12,
       type: 'special',
-      targetSelf:true,
+      targetSelf: true,
       statusEffects: [
         {
           type: 'boost_str',
           name: 'Fureur',
           description: 'Force augmentée',
-          duration: 6,
-          potency: 5,
+          duration: 4,
+          potency: 8,
         }
       ]
     },
   ],
+  // ========== MOZARRELLI SKILLS ==========
   3: [
     {
-      id:'mozarrelli_skill_1',
-      name:'Les crocs',
+      id: 'mozarrelli_skill_1',
+      name: 'Les crocs',
       description: 'Mord l\'adversaire',
-      baseDamage: 10,
-      mpCost: 20,
+      baseDamage: 15,
+      mpCost: 15,
       type: 'physical',
       scalingStat: 'strength',
-      scalingRatio: 1.3,
+      scalingRatio: 1.2,
     },
     {
-      id:'mozarrelli_skill_2',
-      name:'Doux parfum',
-      description:'Renifle sa propre odeur',
+      id: 'mozarrelli_skill_2',
+      name: 'Doux parfum',
+      description: 'Renifle sa propre odeur',
       baseDamage: 0,
-      mpCost: 20,
+      mpCost: 30,
       type: 'special',
-      targetSelf:true,
-      statusEffects:[
+      targetSelf: true,
+      statusEffects: [
         {
-          type:'boost_str',
-          name:'Fureur',
-          description:'Force augmentée',
-          duration: 10,
-          potency: 20,
+          type: 'boost_str',
+          name: 'Fureur',
+          description: 'Force augmentée',
+          duration: 4,
+          potency: 10,
         },
         {
-          type:'poison',
-          name:'Empoisonné',
-          description:'Perd des HP tous les tours',
-          duration: 3,
-          potency: 0.1,
+          type: 'poison',
+          name: 'Empoisonné',
+          description: 'Perd des HP tous les tours',
+          duration: 5,
+          potency: 0.08,
         }
       ]
     },
     {
-      id:'mozarrelli_skill_3',
-      name:'Attrappe poule',
-      description:'Attrappe les pieds de l\'adversaire',
-      baseDamage: 10,
-      mpCost:20,
+      id: 'mozarrelli_skill_3',
+      name: 'Attrappe poule',
+      description: 'Attrappe les pieds de l\'adversaire',
+      baseDamage: 0,
+      mpCost: 40,
       type: 'special',
-      scalingStat: 'strength',
-      scalingRatio: 1,
-      statusEffects:[
+      statusEffects: [
         {
           type: 'stun',
           name: 'Etourdi',
           description: 'Ne peut pas agir',
-          duration: 3,
+          duration: 2,
           potency: 0,
         }
       ]
     },
     {
-      id:'mozarrelli_skill_4',
-      name:'Table basse',
-      description:'On en parlera pas',
-      baseDamage:0,
-      mpCost:20,
+      id: 'mozarrelli_skill_4',
+      name: 'Table basse',
+      description: 'On en parlera pas',
+      baseDamage: 0,
+      mpCost: 35,
       type: 'special',
-      scalingStat: 'strength',
-      scalingRatio: 1,
-      statusEffects:[
+      statusEffects: [
         {
           type: 'poison',
           name: 'Empoisonné',
           description: 'Perd des HP tous les tours',
           duration: 3,
-          potency: 0.15,
+          potency: 0.08,
         },
         {
           type: 'burn',
           name: 'Brulure',
           description: 'Perd des HP tous les tours',
           duration: 3,
-          potency: 30,
+          potency: 20,
         }
       ]
     },
     {
-      id:'mozarrelli_skill_5',
-      name:'Coup de pelle',
-      description:'Attaque l\'adversaire avec une pelle',
-      baseDamage:30,
-      mpCost:20,
+      id: 'mozarrelli_skill_5',
+      name: 'Coup de pelle',
+      description: 'Attaque l\'adversaire avec une pelle',
+      baseDamage: 25,
+      mpCost: 18,
       type: 'special',
       scalingStat: 'strength',
-      scalingRatio: 1,
+      scalingRatio: 1.3,
     },
     {
-      id:'mozarrelli_skill_6',
-      name:'Réflexion',
-      description:'CONCENTRE TOI',
-      baseDamage:0,
-      mpCost:20,
+      id: 'mozarrelli_skill_6',
+      name: 'Réflexion',
+      description: 'CONCENTRE TOI',
+      baseDamage: 0,
+      mpCost: 20,
       type: 'magical',
-      targetSelf:true,
-      statusEffects:[
+      targetSelf: true,
+      statusEffects: [
         {
           type: 'boost_int',
           name: 'Clairvoyance',
@@ -383,10 +394,11 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       ]
     }
   ],
+  // ========== CRIMINOU SKILLS ==========
   4: [
     {
-      id:'criminou_skill_1',
-      name:'Griffes de pétales',
+      id: 'criminou_skill_1',
+      name: 'Griffes de pétales',
       description: 'Des pétales tranchants virevoltent',
       baseDamage: 20,
       mpCost: 15,
@@ -395,32 +407,32 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       scalingRatio: 1.3,
     },
     {
-      id:'criminou_skill_2',
-      name:'Pollen soporifique',
-      description:'Un nuage floral endort l\'ennemi',
+      id: 'criminou_skill_2',
+      name: 'Pollen soporifique',
+      description: 'Un nuage floral endort l\'ennemi',
       baseDamage: 0,
-      mpCost: 20,
+      mpCost: 40,
       type: 'special',
-      statusEffects:[
+      statusEffects: [
         {
-          type:'stun',
-          name:'Étourdi',
-          description:'Ne peut pas agir',
+          type: 'stun',
+          name: 'Étourdi',
+          description: 'Ne peut pas agir',
           duration: 2,
           potency: 0,
         }
       ]
     },
     {
-      id:'criminou_skill_3',
-      name:'Ronces de glace',
-      description:'Des lianes épineuses gèlent leur cible',
-      baseDamage: 10,
-      mpCost:18,
+      id: 'criminou_skill_3',
+      name: 'Ronces de glace',
+      description: 'Des lianes épineuses gèlent leur cible',
+      baseDamage: 15,
+      mpCost: 18,
       type: 'magical',
       scalingStat: 'intelligence',
       scalingRatio: 1.1,
-      statusEffects:[
+      statusEffects: [
         {
           type: 'freeze',
           name: 'Gelé',
@@ -431,16 +443,16 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       ]
     },
     {
-      id:'criminou_skill_4',
-      name:'Photosynthèse',
-      description:'Se nourrit du soleil',
-      baseDamage:-35,
-      mpCost:22,
+      id: 'criminou_skill_4',
+      name: 'Photosynthèse',
+      description: 'Se nourrit du soleil',
+      baseDamage: -40,
+      mpCost: 22,
       type: 'heal',
       scalingStat: 'intelligence',
-      scalingRatio: 1.2,
-      targetSelf:true,
-      statusEffects:[
+      scalingRatio: 1.3,
+      targetSelf: true,
+      statusEffects: [
         {
           type: 'regen',
           name: 'Régénération',
@@ -451,98 +463,101 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       ]
     },
     {
-      id:'criminou_skill_5',
-      name:'Parfum toxique',
-      description:'Une odeur délicieusement mortelle',
-      baseDamage:0,
-      mpCost:15,
+      id: 'criminou_skill_5',
+      name: 'Parfum toxique',
+      description: 'Une odeur délicieusement mortelle',
+      baseDamage: 8,
+      mpCost: 18,
       type: 'special',
-      statusEffects:[
+      scalingStat: 'dexterity',
+      scalingRatio: 0.6,
+      statusEffects: [
         {
           type: 'poison',
           name: 'Empoisonné',
           description: 'Perd des HP% tous les tours',
           duration: 4,
-          potency: 0.07,
+          potency: 0.06,
         }
       ]
     },
     {
-      id:'criminou_skill_6',
-      name:'Avatar printanier',
-      description:'Criminou devient l\'Avatar du printemps',
-      baseDamage:0,
-      mpCost:30,
+      id: 'criminou_skill_6',
+      name: 'Avatar printanier',
+      description: 'Criminou devient l\'Avatar du printemps',
+      baseDamage: 0,
+      mpCost: 35,
       type: 'magical',
-      targetSelf:true,
-      statusEffects:[
+      targetSelf: true,
+      statusEffects: [
         {
           type: 'boost_int',
           name: 'Clairvoyance',
           description: 'Intelligence boostée',
-          duration: 5,
-          potency: 20,
+          duration: 4,
+          potency: 15,
         },
         {
           type: 'boost_dex',
           name: 'Célérité',
           description: 'Dextérité boostée',
-          duration: 5,
+          duration: 4,
           potency: 10,
         }
       ]
     }
   ],
-  5:[
+  // ========== SKYY SKILLS ==========
+  5: [
     {
-      id:'skyy_skill_1',
-      name:'Châtiment sacré',
+      id: 'skyy_skill_1',
+      name: 'Châtiment sacré',
       description: 'La lumière frappe la cible',
       baseDamage: 28,
-      mpCost: 30,
+      mpCost: 18,
       type: 'magical',
       scalingStat: 'intelligence',
       scalingRatio: 1.4,
     },
     {
-      id:'skyy_skill_2',
-      name:'Mot de l\'ombre: Tourment',
-      description:'Une souffrance persiste sur la cible',
-      baseDamage: 5,
-      mpCost: 18,
+      id: 'skyy_skill_2',
+      name: 'Mot de l\'ombre: Tourment',
+      description: 'Une souffrance persiste sur la cible',
+      baseDamage: 10,
+      mpCost: 20,
       type: 'magical',
       scalingStat: 'intelligence',
       scalingRatio: 1,
-      statusEffects:[
+      statusEffects: [
         {
-          type:'burn',
-          name:'Brûlure',
-          description:'Perd des HP tous les tours',
+          type: 'burn',
+          name: 'Brûlure',
+          description: 'Perd des HP tous les tours',
           duration: 4,
           potency: 15,
         }
       ]
     },
     {
-      id:'skyy_skill_3',
-      name:'Mot de l\'ombre: Faiblesse',
-      description:'Affaiblit la cible',
-      baseDamage: 0,
-      mpCost:15,
+      id: 'skyy_skill_3',
+      name: 'Mot de l\'ombre: Faiblesse',
+      description: 'Affaiblit la cible',
+      baseDamage: 5,
+      mpCost: 22,
       type: 'magical',
-      statusEffects:[
+      statusEffects: [
         {
           type: 'weaken',
           name: 'Affaibli',
           description: 'Force réduite',
-          duration: 4,
+          duration: 3,
           potency: 8,
         },
         {
           type: 'slow',
           name: 'Ralentit',
           description: 'Dextérité réduite',
-          duration: 4,
+          duration: 3,
           potency: 8,
         },
         {
@@ -555,55 +570,57 @@ export const CHARACTER_SKILLS: Record<number, Skill[]> = {
       ]
     },
     {
-      id:'skyy_skill_4',
-      name:'Mot de l\'ombre: Cauchemar',
-      description:'Montre les pires horreurs à votre adversaire',
-      baseDamage:1,
-      mpCost:20,
+      id: 'skyy_skill_4',
+      name: 'Mot de l\'ombre: Cauchemar',
+      description: 'Montre les pires horreurs à votre adversaire',
+      baseDamage: 0,
+      mpCost: 45,
       type: 'magical',
-      statusEffects:[
+      statusEffects: [
         {
           type: 'stun',
           name: 'Étourdit',
           description: 'Ne peut pas agir',
-          duration: 3,
+          duration: 2,
           potency: 0,
         },
       ]
     },
     {
-      id:'skyy_skill_5',
-      name:'Mot de pouvoir: Intelligence',
-      description:'La sagesse divine vous éclaire',
-      baseDamage:0,
-      mpCost:20,
+      id: 'skyy_skill_5',
+      name: 'Mot de pouvoir: Intelligence',
+      description: 'La sagesse divine vous éclaire',
+      baseDamage: 0,
+      mpCost: 28,
       type: 'magical',
-      targetSelf:true,
-      statusEffects:[
+      targetSelf: true,
+      statusEffects: [
         {
           type: 'boost_int',
           name: 'Sagesse',
           description: 'Intelligence augmentée',
-          duration: 6,
-          potency: 20,
+          duration: 4,
+          potency: 15,
         }
       ]
     },
     {
-      id:'skyy_skill_6',
-      name:'Mot de pouvoir: Bouclier',
-      description:'La foi renforce le corps',
-      baseDamage:-20,
-      mpCost:18,
-      type: 'special',
-      targetSelf:true,
-      statusEffects:[
+      id: 'skyy_skill_6',
+      name: 'Mot de pouvoir: Bouclier',
+      description: 'La foi renforce le corps',
+      baseDamage: -30,
+      mpCost: 20,
+      type: 'heal',
+      scalingStat: 'intelligence',
+      scalingRatio: 1,
+      targetSelf: true,
+      statusEffects: [
         {
           type: 'regen',
           name: 'Régénération',
           description: 'Récupère des HP tous les tours',
-          duration: 5,
-          potency: 20,
+          duration: 4,
+          potency: 15,
         },
         {
           type: 'boost_dex',
