@@ -56,6 +56,10 @@ export class CharacterSelectComponent implements OnDestroy {
     if (this.gameMode === 'solo') {
       this.selectedCharacters = [id];
     } else if (this.gameMode === 'versus') {
+
+      const otherPlayerIndex = this.isFirstPlayerChoosing ? 1 : 0;
+      if (this.selectedCharacters[otherPlayerIndex] === id) return;
+
       if (this.selectedCharacters.length < 2) {
         this.selectedCharacters.push(id);
         this.isFirstPlayerChoosing = !this.isFirstPlayerChoosing;

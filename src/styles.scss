@@ -61,6 +61,17 @@ h1 {
   }
 }
 
+.menu-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1000;
+  object-fit: cover;
+}
+
+
 .unselectable {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none;     /* IE 10+ / Edge */

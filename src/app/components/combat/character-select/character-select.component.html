@@ -7,12 +7,15 @@
 
   <div class="select-list-container">
     <ul>
-      <li *ngFor="let c of characters" (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
-          [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">
-        {{ c.name }}
-      </li>
+      @for (c of characters; track c.id) {
+        <li (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
+            [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">
+          <div>{{ c.name }}</div>
+          <img src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+        </li>
+      }
     </ul>
-    <p>MORE CHARACTERS TO COME, STAY TUNED</p>
+    <p style="margin-top: 5rem;">MORE CHARACTERS TO COME, STAY TUNED</p>
   </div>
 
   <div class="selection-menu">
@@ -22,3 +25,4 @@
 
 </div>
 
+<img class="menu-background" src="assets/placeholders/Fond-test.png" alt="">
