@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, inject, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {CharactersService} from '../../../services/characters.service';
 import {Character} from '../../../models/characters.model';
 import {randomInt} from 'toolzy';
@@ -20,6 +20,7 @@ import {StatusEffectService} from '../../../services/status-effect.service';
 export class CombatMainComponent {
 
   @ViewChildren('player') _playerList!: QueryList<ElementRef>;
+  @ViewChild('combatLogContainer') _combatLogContainer!: ElementRef;
 
   private destroy$ = new Subject<void>();
 
@@ -271,5 +272,8 @@ export class CombatMainComponent {
 
   private addLog(log: CombatLog) {
     this.combatLog.push(log);
+    setTimeout(()=>{
+      if (this._combatLogContainer) this._combatLogContainer.nativeElement.scrollTop = this._combatLogContainer.nativeElement.scrollHeight;
+    },0);
   }
 }

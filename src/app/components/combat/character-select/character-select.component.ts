@@ -10,7 +10,6 @@ import {GameMode} from '../../../models/combat-state.model';
 @Component({
   selector: 'app-character-select',
   imports: [
-    NgForOf,
     RouterLink
   ],
   templateUrl: './character-select.component.html',

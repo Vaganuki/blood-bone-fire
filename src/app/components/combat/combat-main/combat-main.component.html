@@ -112,7 +112,7 @@
 
     <div class="combat-logs">
       <div class="log-title">COMBAT LOGS</div>
-      <div class="log-text">
+      <div class="log-text" #combatLogContainer>
         @for (log of combatLog; track log.message) {
           <p>{{ log.message }}</p>
         }
