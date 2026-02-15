@@ -183,11 +183,6 @@ export class CombatMainComponent {
       return;
     }
 
-    const expiredEffect = this._statusEffectService.decrementStatusEffects(currentCharacter);
-    expiredEffect.forEach(status => {
-      this.addLog(status);
-    });
-
     const mpRegen = this._skillsService.regenerateMP(currentCharacter);
     if (mpRegen > 0) {
       this.addLog({
@@ -197,6 +192,11 @@ export class CombatMainComponent {
     }
 
     this.getRandomTurnSkills();
+
+    const expiredEffect = this._statusEffectService.decrementStatusEffects(currentCharacter);
+    expiredEffect.forEach(status => {
+      this.addLog(status);
+    });
   }
 
   private aiTurn() {
