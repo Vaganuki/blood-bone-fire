@@ -41,11 +41,16 @@
       </div>
       @if (character1.statusEffects) {
         <div class="character-effect-card">
-          <ul>
+          <ul class="unselectable">
             @for (eff of character1.statusEffects; track eff.name) {
-              <li>
-                <div class="displayed-effect">
-                  <img src="assets/placeholders/rpg-icons/single/{{eff.type}}.png" alt="">
+              <li class="displayed-effect">
+                <div class="effect-img-container">
+                  <img src="assets/placeholders/rpg-icons/single/{{eff.type}}.png" alt="{{eff.type}}">
+                  <div class="effect-duration">{{eff.duration}}</div>
+                </div>
+                <div class="displayed-effect-desc">
+                  <div class="effect-name">{{eff.name}}</div>
+                  <div class="effect-desc">{{eff.description}}</div>
                 </div>
               </li>
             }
@@ -91,9 +96,18 @@
       </div>
       @if (character2.statusEffects) {
         <div class="character-effect-card">
-          <ul>
+          <ul class="unselectable">
             @for (eff of character2.statusEffects; track eff.name) {
-              <li>{{ eff.name }} ({{ eff.duration }})</li>
+              <li class="displayed-effect">
+                <div class="effect-img-container">
+                  <img src="assets/placeholders/rpg-icons/single/{{eff.type}}.png" alt="{{eff.type}}">
+                  <div class="effect-duration">{{eff.duration}}</div>
+                </div>
+                <div class="displayed-effect-desc">
+                  <div class="effect-name">{{eff.name}}</div>
+                  <div class="effect-desc">{{eff.description}}</div>
+                </div>
+              </li>
             }
           </ul>
         </div>

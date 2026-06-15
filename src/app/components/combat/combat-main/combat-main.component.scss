@@ -27,6 +27,7 @@
         img {
           width: 100%;
         }
+
         width: 7.5vw;
       }
 
@@ -104,12 +105,50 @@
           }
         }
       }
+
       .character-effect-card {
-        ul{
+        ul {
           list-style: none;
-          .displayed-effect{
-            img{
-              width: 2.5vw;
+          padding: 0;
+
+          .displayed-effect {
+            position: relative;
+            .effect-img-container {
+              position: relative;
+              width: fit-content;
+              aspect-ratio: 1/1;
+              img {
+                width: 2.5vw;
+              }
+              .effect-duration{
+                position: absolute;
+                bottom: 15%;
+                right: 15%;
+                color:white;
+              }
+            }
+
+            .displayed-effect-desc {
+              display: none;
+
+              z-index: 1;
+
+              border: red 2px solid;
+              text-align: center;
+              padding: 0.5rem;
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              transform: translate(-50%);
+              background-color: rgba(black, 0.8);
+              color: white;
+              .effect-name{
+                font-weight: bold;
+                text-decoration: underline;
+              }
+            }
+            .effect-img-container:hover ~ .displayed-effect-desc{
+              display: block;
             }
           }
         }
@@ -174,14 +213,14 @@
 }
 
 .player-1 {
-  .activePlayer:before{
+  .activePlayer:before {
     background-image: url("/assets/placeholders/active_player_1.webp");
   }
 }
 
 .player-2 {
-  .activePlayer:before{
-        background-image: url("/assets/placeholders/active_player_2.webp");
+  .activePlayer:before {
+    background-image: url("/assets/placeholders/active_player_2.webp");
   }
 }
 

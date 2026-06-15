@@ -17,7 +17,6 @@ export interface StatusEffect {
   description: string;
   duration: number; //Duration in turns
   potency: number;
-  icon?: string; //Maybe for later TODO sort of
 }
 
 export interface ActiveStatusEffect extends StatusEffect {
