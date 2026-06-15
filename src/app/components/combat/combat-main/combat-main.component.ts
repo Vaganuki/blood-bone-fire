@@ -44,6 +44,16 @@ export class CombatMainComponent {
   lastSkillEffect?: SkillEffect;
   combatLog: CombatLog[] = [];
 
+  turnSkip : Skill = {
+    id:'turn_skip',
+    name:'Attendre',
+    description: 'Passe son tour',
+    baseDamage: 0,
+    mpCost: 0,
+    type: "physical",
+    targetSelf: true
+  }
+
   ngOnInit() {
     if (!this._combatService.isCombatReady()) {
       this._router.navigate(['/']).then();

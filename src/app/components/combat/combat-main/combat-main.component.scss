@@ -104,7 +104,16 @@
           }
         }
       }
-
+      .character-effect-card {
+        ul{
+          list-style: none;
+          .displayed-effect{
+            img{
+              width: 2.5vw;
+            }
+          }
+        }
+      }
 
     }
 
@@ -117,8 +126,9 @@
   .combat-menu {
 
     display: grid;
-    grid-template: 80% 20% / 20% 80%;
+    grid-template: 15% 70% 15% / 20% 80%;
     grid-template-areas:
+  'turnSkip combatLogs'
   'attackButtons combatLogs'
   'exitButton combatLogs';
 
@@ -193,6 +203,10 @@ h1 {
 }
 
 //For grid purpose
+.combat-turn-skip-button {
+  grid-area: turnSkip;
+}
+
 .combat-menu-attack {
   grid-area: attackButtons;
 }
