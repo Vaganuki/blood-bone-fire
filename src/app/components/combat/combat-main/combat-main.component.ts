@@ -44,9 +44,9 @@ export class CombatMainComponent {
   lastSkillEffect?: SkillEffect;
   combatLog: CombatLog[] = [];
 
-  turnSkip : Skill = {
-    id:'turn_skip',
-    name:'Attendre',
+  turnSkip: Skill = {
+    id: 'turn_skip',
+    name: 'Attendre',
     description: 'Passe son tour',
     baseDamage: 0,
     mpCost: 0,
@@ -212,6 +212,8 @@ export class CombatMainComponent {
   private aiTurn() {
     this.switchPlayer();
 
+    if (this.activePlayer!==1) return;
+
     const aiSkills = this._skillsService.getRandomTurnSkills(this.character2);
 
     const usableSkills = aiSkills.filter(skill => this._skillsService.canUseSkill(skill, this.character2).canUse);
@@ -265,9 +267,9 @@ export class CombatMainComponent {
 
   getHpBarColor(currentHp: number, maxHp: number): string {
     const percentage = (currentHp / maxHp) * 100;
-    if(percentage >= 75) return 'green';
-    if(percentage >= 50) return 'orange';
-    if(percentage >= 25) return 'red';
+    if (percentage >= 75) return 'green';
+    if (percentage >= 50) return 'orange';
+    if (percentage >= 25) return 'red';
     return 'crimson';
   }
 
@@ -282,8 +284,8 @@ export class CombatMainComponent {
 
   private addLog(log: CombatLog) {
     this.combatLog.push(log);
-    setTimeout(()=>{
+    setTimeout(() => {
       if (this._combatLogContainer) this._combatLogContainer.nativeElement.scrollTop = this._combatLogContainer.nativeElement.scrollHeight;
-    },0);
+    }, 0);
   }
 }
