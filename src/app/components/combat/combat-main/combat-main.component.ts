@@ -212,7 +212,7 @@ export class CombatMainComponent {
   private aiTurn() {
     this.switchPlayer();
 
-    if (this.activePlayer!==1) return;
+    if (this.activePlayer !== 1) return;
 
     const aiSkills = this._skillsService.getRandomTurnSkills(this.character2);
 
@@ -263,6 +263,8 @@ export class CombatMainComponent {
     }
 
     this.switchPlayer();
+
+    if (this.activePlayer === 1) this.aiTurn();
   }
 
   getHpBarColor(currentHp: number, maxHp: number): string {
