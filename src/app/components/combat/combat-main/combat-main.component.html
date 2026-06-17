@@ -50,11 +50,11 @@
               <li class="displayed-effect">
                 <div class="effect-img-container">
                   <img src="assets/placeholders/rpg-icons/single/{{eff.type}}.png" alt="{{eff.type}}">
-                  <div class="effect-duration">{{eff.duration}}</div>
+                  <div class="effect-duration">{{ eff.duration }}</div>
                 </div>
                 <div class="displayed-effect-desc">
-                  <div class="effect-name">{{eff.name}}</div>
-                  <div class="effect-desc">{{eff.description}}</div>
+                  <div class="effect-name">{{ eff.name }}</div>
+                  <div class="effect-desc">{{ eff.description }}</div>
                 </div>
               </li>
             }
@@ -67,7 +67,8 @@
 
       <div class="character-sprite" #player>
         @if (character2.hasAvatar) {
-          <img style="transform: scaleX(-1)" src="assets/placeholders/avatar/{{character2.name}}.png" alt="avatar générique">
+          <img style="transform: scaleX(-1)" src="assets/placeholders/avatar/{{character2.name}}.png"
+               alt="avatar générique">
         } @else {
           <img style="transform: scaleX(-1)" src="assets/placeholders/player_placeholder.webp" alt="avatar générique">
         }
@@ -109,11 +110,11 @@
               <li class="displayed-effect">
                 <div class="effect-img-container">
                   <img src="assets/placeholders/rpg-icons/single/{{eff.type}}.png" alt="{{eff.type}}">
-                  <div class="effect-duration">{{eff.duration}}</div>
+                  <div class="effect-duration">{{ eff.duration }}</div>
                 </div>
                 <div class="displayed-effect-desc">
-                  <div class="effect-name">{{eff.name}}</div>
-                  <div class="effect-desc">{{eff.description}}</div>
+                  <div class="effect-name">{{ eff.name }}</div>
+                  <div class="effect-desc">{{ eff.description }}</div>
                 </div>
               </li>
             }
@@ -130,8 +131,14 @@
     <div class="combat-menu-attack">
       @for (skill of displayedSkills; track skill.id) {
         <button (click)="useSkill(skill)">
-          <div class="skill-name">{{ skill.name }}</div>
-          <div>COUT :{{ skill.mpCost }} MP</div>
+          <span class="skill-shown">
+            <div class="skill-name {{skill.type}}">{{ skill.name }}</div>
+            <div>COUT :{{ skill.mpCost }} MP</div>
+          </span>
+          <span class="skill-hover">
+            <span class="skill-description">{{ skill.description }}</span>
+            <span class="skill-base-dmg">Base Damage: {{ skill.baseDamage }}</span>
+          </span>
         </button>
       }
     </div>
