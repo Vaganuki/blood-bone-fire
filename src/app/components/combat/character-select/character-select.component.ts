@@ -24,7 +24,7 @@ export class CharacterSelectComponent implements OnDestroy {
 
   gameMode: GameMode = null;
   isIaOpponent = false;
-  characters: { id: number, name: string }[] = [];
+  characters: { id: number, name: string, hasAvatar:boolean }[] = [];
   selectedCharacters: number[] = [];
   isFirstPlayerChoosing = true;
 

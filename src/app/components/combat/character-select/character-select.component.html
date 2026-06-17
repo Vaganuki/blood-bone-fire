@@ -11,8 +11,11 @@
         <li (click)="selectCharacter(c.id)" [class.selected]="isSelected(c.id)"
             [class.player1]="isChosenByPlayer1(c.id)" [class.player2]="isChosenByPlayer2(c.id)">
           <div>{{ c.name }}</div>
-          <img src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
-        </li>
+          @if (c.hasAvatar) {
+            <img class="card-picture" src="assets/placeholders/avatar/{{c.name}}-card.jpg" alt="avatar de {{c.name}}">
+          } @else {
+            <img class="card-picture" src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+          }        </li>
       }
     </ul>
     <p style="margin-top: 5rem;">MORE CHARACTERS TO COME, STAY TUNED</p>
