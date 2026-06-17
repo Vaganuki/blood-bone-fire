@@ -174,6 +174,22 @@
     .combat-menu-attack {
       display: grid;
       grid-template: 1fr 1fr/ 1fr 1fr;
+
+      button{
+        .skill-hover{
+          display: none;
+          color: red;
+        }
+        &:hover{
+          .skill-shown{
+            display: none;
+          }
+          .skill-hover{
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
     }
 
     .combat-logs {
