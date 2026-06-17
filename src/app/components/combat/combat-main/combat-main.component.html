@@ -7,7 +7,11 @@
     <div class="combat-character player-1">
 
       <div class="character-sprite" #player>
-        <img src="assets/placeholders/player_placeholder.webp" alt="character sprite">
+        @if (character1.hasAvatar) {
+          <img src="assets/placeholders/avatar/{{character1.name}}.png" alt="avatar générique">
+        } @else {
+          <img src="assets/placeholders/player_placeholder.webp" alt="avatar générique">
+        }
       </div>
       <div class="character-stat-card">
         <div class="character-name">{{ character1.name }}</div>
@@ -62,7 +66,11 @@
     <div class="combat-character player-2">
 
       <div class="character-sprite" #player>
-        <img style="transform: scaleX(-1)" src="assets/placeholders/player_placeholder.webp" alt="character sprite">
+        @if (character2.hasAvatar) {
+          <img style="transform: scaleX(-1)" src="assets/placeholders/avatar/{{character2.name}}.png" alt="avatar générique">
+        } @else {
+          <img style="transform: scaleX(-1)" src="assets/placeholders/player_placeholder.webp" alt="avatar générique">
+        }
       </div>
       <div class="character-stat-card">
         <div class="character-name">{{ character2.name }}</div>

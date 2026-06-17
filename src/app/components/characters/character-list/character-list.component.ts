@@ -15,22 +15,23 @@ export class CharacterListComponent {
 
   private platformId = inject(PLATFORM_ID)
 
-  characters: {id: number, name: string}[] = [];
+  characters: { id: number, name: string, hasAvatar: boolean }[] = [];
   selectedCharacter: Character | null = null;
 
-  constructor(private _characterService: CharactersService) {}
+  constructor(private _characterService: CharactersService) {
+  }
 
   ngOnInit() {
     this._characterService.getAllCharacters().subscribe(characters => {
       this.characters = characters;
     });
-    if(isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('keydown', this.keyboardClearSelectedCharacters)
     }
   }
 
   ngOnDestroy() {
-    if(isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       window.removeEventListener('keydown', this.keyboardClearSelectedCharacters);
     }
   }
@@ -50,7 +51,7 @@ export class CharacterListComponent {
   }
 
   closeContainer(event: MouseEvent) {
-    if(event.target === event.currentTarget) this.clearSelectedCharacter();
+    if (event.target === event.currentTarget) this.clearSelectedCharacter();
   }
 }
 

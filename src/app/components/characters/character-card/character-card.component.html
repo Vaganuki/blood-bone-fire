@@ -1,6 +1,10 @@
 <div class="character-card">
   <div class="card-header">
-    <img class="card-picture" src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+    @if (character.hasAvatar) {
+      <img class="card-picture" src="assets/placeholders/avatar/{{character.name}}-card.jpg" alt="avatar générique">
+    } @else {
+      <img class="card-picture" src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+    }
     <h2>{{ character.name }}</h2>
   </div>
 

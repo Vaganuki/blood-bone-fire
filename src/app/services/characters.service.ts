@@ -22,10 +22,11 @@ export class CharactersService {
     });
   }
 
-  getAllCharacters(): Observable<{ id: number, name: string }[]> {
+  getAllCharacters(): Observable<{ hasAvatar: boolean; id: number; name: string }[]> {
     const allCharacters = this.characterList.map(c => ({
       id: c.id,
       name: c.name,
+      hasAvatar: c.hasAvatar
     }));
     return of(allCharacters);
   }

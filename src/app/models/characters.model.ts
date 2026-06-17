@@ -17,4 +17,5 @@ export interface Character {
   baseStats: CharacterStats;
   statusEffects: ActiveStatusEffect[];
   mpRegenPerTurn: number;
+  hasAvatar: boolean;
 }

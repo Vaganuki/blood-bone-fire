@@ -24,6 +24,7 @@ export const CHARACTERS_DATA: Character[] = [
     },
     statusEffects: [],
     mpRegenPerTurn: 12,
+    hasAvatar: true,
   },
   {
     id: 2,
@@ -48,6 +49,7 @@ export const CHARACTERS_DATA: Character[] = [
     },
     statusEffects: [],
     mpRegenPerTurn: 15,
+    hasAvatar: false,
   },
   {
     id: 3,
@@ -72,6 +74,7 @@ export const CHARACTERS_DATA: Character[] = [
     },
     statusEffects: [],
     mpRegenPerTurn: 6,
+    hasAvatar: false,
   },
   {
     id: 4,
@@ -96,6 +99,7 @@ export const CHARACTERS_DATA: Character[] = [
     },
     statusEffects: [],
     mpRegenPerTurn: 14,
+    hasAvatar: false,
   },
   {
     id: 5,
@@ -120,6 +124,7 @@ export const CHARACTERS_DATA: Character[] = [
     },
     statusEffects: [],
     mpRegenPerTurn: 13,
+    hasAvatar: false,
   }
 ];
 
