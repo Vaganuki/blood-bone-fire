@@ -1,2 +1,21 @@
-<p>Le vainqueur est {{winnerName}}</p>
-<button [routerLink]="'/'">retour à l'acceuil</button>
+<div class="ending-screen-container">
+
+  <p class="ending-screen-title">Le vainqueur est :</p>
+  <div class="winner-card">
+    <div class="winner-icon">
+      @if (winner?.hasAvatar) {
+        <img class="card-picture" src="assets/placeholders/avatar/{{winner?.name}}-card.jpg"
+             alt="avatar de {{winner?.name}}">
+      } @else {
+        <img class="card-picture" src="assets/placeholders/place-holder-avatar.webp" alt="avatar générique">
+      }
+      <p>{{ winner?.name }}</p>
+    </div>
+  </div>
+  <div class="ending-button-container">
+    <button class="menu-button" [routerLink]="'/'">retour à l'accueil</button>
+
+  </div>
+</div>
+
+<img class="menu-background" src="assets/placeholders/Fond-test.png" alt="">
