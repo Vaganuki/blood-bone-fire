@@ -1,0 +1,42 @@
+@use "../../../../styles.scss" as *;
+
+.ending-screen-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  width: calc(100vw - 4rem);
+  height: calc(100vh - 4rem);
+  margin: 2rem;
+  padding: 1rem;
+  border: double 4px $dark-red;
+
+  color: white;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  url("/assets/placeholders/Menu_background_test.png") center no-repeat;
+  background-size: cover;
+
+  .ending-screen-title{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .winner-card{
+    border: double 4px $red;
+    padding: 1rem;
+    width: fit-content;
+    p{
+      font-size: 1.2rem;
+      margin: 0.75rem 0 0 ;
+    }
+    .winner-icon{
+      width: 10vw;
+      img{
+        width: 100%;
+      }
+    }
+  }
+}

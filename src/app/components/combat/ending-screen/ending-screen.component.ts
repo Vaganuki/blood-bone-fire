@@ -20,13 +20,17 @@ export class EndingScreenComponent {
   private _characterService = inject(CharactersService);
   private characterList: Character[] = CHARACTERS_DATA;
 
-  winnerName: string = '';
+  winner : { id: number, name: string, hasAvatar: boolean } | null = null;
 
   ngOnInit() {
     const winnerID = this._combatService.winnerID;
     const character = this.characterList.find(c => c.id === winnerID);
     if (character) {
-      this.winnerName = character.name;
+      this.winner = {
+        id: character.id,
+        name: character.name,
+        hasAvatar: character.hasAvatar,
+      }
     }
   }
 
